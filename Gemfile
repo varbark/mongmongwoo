@@ -11,6 +11,8 @@ gem 'turbolinks'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem "paranoia", "~> 2.0" # 軟刪除
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development do
   gem "better_errors"
