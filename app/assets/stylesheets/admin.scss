@@ -1,12 +1,7 @@
-/*Bootstrap core CSS*/
+/*Common CSS*/
+@import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+@import "styles";
 
 /*External css*/
-@import "zabuto_calendar";
-@import "jquery.gritter";
-@import "icon_style";
-
-/*Custom styles for index page*/
-@import "style";
-@import "style-responsive";
