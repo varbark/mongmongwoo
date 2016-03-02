@@ -1,0 +1,11 @@
+<div clas="row">
+  <div class="content-box-large">
+    <h2><%= @item.name %></h2>
+    <div class="item-price">
+      <p>NT<%= number_to_currency(@item.price) %></p>
+    </div>
+    <div class="default-item-photo">
+      <%= image_tag(@item.image) if @item.image %> 
+    </div>
+  </div>
+</div>
