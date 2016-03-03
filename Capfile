@@ -10,7 +10,7 @@ require 'capistrano/rails'
 # If you are using rbenv add these lines:
 require 'capistrano/rbenv'
 set :rbenv_type, :user # or :system, depends on your rbenv setup
-set :rbenv_ruby, '2.2.4p230'
+set :rbenv_ruby, '2.2.4'
 
 # If you are using rvm add these lines:
 # require 'capistrano/rvm'
