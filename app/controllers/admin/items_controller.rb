@@ -4,6 +4,11 @@ class Admin::ItemsController < AdminController
 
   def index
     @items = Item.recent
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => @items }
+    end
   end
 
   def new
@@ -23,6 +28,10 @@ class Admin::ItemsController < AdminController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.json { render :json => @item }
+    end
   end
 
   def edit    
