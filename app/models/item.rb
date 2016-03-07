@@ -4,4 +4,7 @@ class Item < ActiveRecord::Base
   enum status: { disable: 0, enable: 1 }
 
   mount_uploader :image, ImageUploader
+
+  has_many :ite_categories
+  has_many :categories, through: :ite_categories  
 end
