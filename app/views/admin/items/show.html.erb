@@ -5,7 +5,7 @@
       <p>NT<%= number_to_currency(@item.price) %></p>
     </div>
     <div class="default-item-photo">
-      <%= image_tag(@item.image) if @item.image %> 
+      <%= item_photo(@item.default_photo) if @item.default_photo %>
     </div>
   </div>
 </div>
