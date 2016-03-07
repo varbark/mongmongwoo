@@ -22,7 +22,7 @@ class Admin::ItemsController < AdminController
       flash[:notice] = "新增商品成功"
       redirect_to admin_root_path
     else
-      flash.now[:alert] = "請確認欄位名稱"
+      flash.now[:alert] = "請確認欄位資料"
       render :new
     end
   end
@@ -56,7 +56,7 @@ class Admin::ItemsController < AdminController
   private
 
   def item_params
-    params.require(:item).permit(:name, :price, :image, :slug)
+    params.require(:item).permit(:name, :price, :image, :slug, category_ids: [])
   end
 
   def find_item
