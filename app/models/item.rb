@@ -5,6 +5,6 @@ class Item < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  has_many :ite_categories
-  has_many :categories, through: :ite_categories  
+  has_many :item_categories
+  has_many :categories, through: :item_categories
 end
