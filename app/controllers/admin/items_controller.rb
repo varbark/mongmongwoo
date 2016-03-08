@@ -21,7 +21,7 @@ class Admin::ItemsController < AdminController
 
     if @item.save
       flash[:notice] = "新增商品成功"
-      redirect_to admin_root_path
+      redirect_to admin_categories_path
     else
       flash.now[:alert] = "請確認欄位資料"
       render :new
@@ -41,7 +41,7 @@ class Admin::ItemsController < AdminController
   def update
     if @item.update(item_params)
       flash[:notice] = "成功更新商品"
-      redirect_to admin_root_path
+      redirect_to admin_categories_path
     else
       flash.now[:alert] = "請確認欄位名稱"
       render :edit
