@@ -15,7 +15,7 @@
           <td><%= item.id %></td>
           <td>
             <%= link_to admin_item_path(item) do %>
-              <%= image_tag(item.image, size: "150x150") if item.image %>
+              <%= image_tag(item.photos.first.image.thumb.url) if item.photos.first.present? %>
             <% end %>
           </td>
           <td><%= link_to item.name, admin_item_path(item) %></td>

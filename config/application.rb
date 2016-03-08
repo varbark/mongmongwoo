@@ -22,5 +22,8 @@ module Monmonhouse
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # 修正無法在 console 下讀取 uploader.rb 問題
+    config.autoload_paths += %W(#{config.root}/app/uploaders)
   end
 end
