@@ -9,13 +9,13 @@
     </li>
     <li>
       <a href="<%= new_admin_item_path %>">
-        <i class="glyphicon glyphicon-pencil"></i>
+        <i class="glyphicon glyphicon-plus"></i>
         新增商品
       </a>
     </li>
     <li class="submenu">
       <a href="#">
-        <i class="glyphicon glyphicon-list"></i>
+        <i class="glyphicon glyphicon-list-alt"></i>
         分類管理
         <span class="caret pull-right"></span>
       </a>
@@ -25,14 +25,13 @@
           <a href="<%= admin_categories_path %>">
             分類列表
           </a>
-        </li>        
         </li>
         <% Category.all.each do |category| %>
           <li>
-          <a href="<%= admin_category_path(category) %>">
-            <%= category.name %>
-          </a>
-        </li>
+            <a href="<%= admin_category_path(category) %>">
+              <%= category.name %>
+            </a>
+          </li>
         <% end %>
         <li>
           <a href="<%= new_admin_category_path %>">
@@ -41,11 +40,29 @@
         </li>
       </ul>
     </li>
+    <li class="submenu">
+      <a href="#">
+        <i class="glyphicon glyphicon-user"></i>
+        用戶管理
+        <span class="caret pull-right"></span>
+      </a>
+      <!-- Sub menu -->
+      <ul>
+        <li>
+          <a href="<%= admin_users_path %>">
+            用戶資料列表
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            用戶選項
+          </a>
+        </li>
+      </ul>
+    </li>
     <li><a href="#"><i class="glyphicon glyphicon-calendar"></i> Calendar</a></li>
     <li><a href="#"><i class="glyphicon glyphicon-stats"></i> Statistics (Charts)</a></li>
-    <li><a href="#"><i class="glyphicon glyphicon-list"></i> Tables</a></li>
-    <li><a href="#"><i class="glyphicon glyphicon-record"></i> Buttons</a></li>    
-    <li><a href="#"><i class="glyphicon glyphicon-tasks"></i> Forms</a></li>
+    <li><a href="#"><i class="glyphicon glyphicon-record"></i> Buttons</a></li>
     <li class="submenu">
       <a href="#">
         <i class="glyphicon glyphicon-list"></i> Pages
