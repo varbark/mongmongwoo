@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308144834) do
+ActiveRecord::Schema.define(version: 20160309124558) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 20160308144834) do
   end
 
   add_index "categories", ["deleted_at"], name: "index_categories_on_deleted_at", using: :btree
+
+  create_table "counties", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "item_categories", force: :cascade do |t|
     t.integer  "item_id",     limit: 4
@@ -55,6 +61,33 @@ ActiveRecord::Schema.define(version: 20160308144834) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "roads", force: :cascade do |t|
+    t.integer  "town_id",    limit: 4
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.integer  "county_id",  limit: 4
+    t.integer  "town_id",    limit: 4
+    t.integer  "road_id",    limit: 4
+    t.integer  "store_type", limit: 4
+    t.string   "store_code", limit: 255
+    t.string   "name",       limit: 255
+    t.string   "address",    limit: 255
+    t.string   "phone",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "towns", force: :cascade do |t|
+    t.integer  "county_id",  limit: 4
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|

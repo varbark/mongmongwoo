@@ -34,6 +34,7 @@ group :development do
   gem "binding_of_caller"
   gem 'meta_request'
   gem 'faker'
+  gem 'pry-rails'
 
   #Capistrano setup
   gem 'capistrano', '~> 3.4'
