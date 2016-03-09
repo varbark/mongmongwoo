@@ -19,25 +19,14 @@
           <td><%= user.phone %></td>
           <td><%= user.address %></td>
           <td>            
-            <li><%= link_to "查看" %></li>
+            <li><%= link_to "查看", admin_user_path(user) %></li>
+            <li><%= link_to "查看", admin_uid_user_path(user, params[:uid]) %></li>
+
             <li><%= link_to "編輯" %></li>
             <li><%= link_to "刪除" %></li>
           </td>
         </tr>
       <% end %>
-
-      <tr>
-        <td>5</td>
-        <td>LuLu</td>
-        <td>女</td>
-        <td>0956-294-176</td>
-        <td>台北市中正區八德路一段10號8樓之2</td>
-        <td>
-          <li><a href="#">查看</a></li>
-          <li><a href="#">編輯</a></li>
-          <li><a href="#">刪除</a></li>          
-        </td>
-      </tr>
     </tbody>
   </table>
 </div>
