@@ -38,10 +38,11 @@ namespace :crawl do
         town = Town.new
         town.county_id = county.id
         town.name = button.children.to_s
-        twon.save!
+        town.save!
       end
 
       find_button("上一步").click
+      sleep(3)
     end
   end
 
@@ -50,14 +51,14 @@ namespace :crawl do
     Capybara.current_driver = :selenium_chrome
     page.visit "http://map.ezship.com.tw/ezship_map_web_2014.jsp"
     find("#ui-id-3").click
-    sleep(3)
-    Count.all.each do |county|
+    sleep(2)
+    County.all.each do |county|
       find_button("#{county.name}").click
-      sleep(3)
+      sleep(2)
       towns = county.towns
       towns.each do |town|
         find_button("#{town.name}").click
-        sleep(3)
+        sleep(2)
         page_no = Nokogiri::HTML(page.html)
         page_no.css("#thisMainArea button").css("span").last.remove
         buttons = page_no.css("#thisMainArea button").css("span")
@@ -70,9 +71,11 @@ namespace :crawl do
         end
 
         find_button("上一步").click
+        sleep(2)
       end
 
       find_button("上一步").click
+      sleep(2)
     end
   end
 
@@ -95,6 +98,7 @@ namespace :crawl do
           sleep(3)
           begin
             find_button("關閉").click
+            sleep(3)
           rescue Eception => e
           end
 
