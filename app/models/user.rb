@@ -20,5 +20,5 @@ class User < ActiveRecord::Base
 
   enum status: { disable: 0, enable: 1 }
 
-  validates_presence_of :user_name, :real_name, :gender, :address, :uid, :phone
+  validates_presence_of :user_name, :uid
 end
