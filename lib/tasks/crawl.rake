@@ -84,22 +84,26 @@ namespace :crawl do
     Capybara.current_driver = :selenium_chrome
     page.visit "http://map.ezship.com.tw/ezship_map_web_2014.jsp"
     find("#ui-id-3").click
-    sleep(3)
+    sleep(2)
     County.all.each do |county|
       find_button("#{county.name}").click
-      sleep(3)
+      sleep(2)
       towns = county.towns
       towns.each do |town|
         find_button("#{town.name}").click
-        sleep(3)
+        sleep(2)
         roads = town.roads
         roads.each do |road|
           find_button("#{road.name}").click
-          sleep(3)
+          sleep(2)
           begin
             find_button("關閉").click
-            sleep(3)
-          rescue Eception => e
+            sleep(2)
+          rescue Exception => e
+            sleep(1)
+            # find_button("關閉").click
+            # find(".ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only").click_link_or_button("關閉")
+            sleep(1)
           end
 
           page_no = Nokogiri::HTML(page.html)
@@ -109,7 +113,7 @@ namespace :crawl do
             store_code = store.css(".cssTDData")[0].children[0].to_s.gsub("門市服務代號:", "")
             store_address = store.css(".cssTDData")[1].children[0].to_s.gsub("地址：", "")
             store_phone = store.css(".cssTDData")[2].children[0].to_s.gsub("電話：", "")
-            pust store_name
+            puts store_name
             puts store_code
             puts store_address
             puts store_phone
@@ -127,22 +131,22 @@ namespace :crawl do
             elsif store_name.index("OK")
               the_store.store_type = 2
             elsif store_name.index("萊爾富")
-              the_store.store_type = 3                      
+              the_store.store_type = 3
             end
 
             the_store.save!
           end
 
           find_button("上一步").click
-          sleep(3)
+          sleep(2)
         end
 
         find_button("上一步").click
-        sleep(3)
+        sleep(2)
       end
 
       find_button("上一步").click
-      sleep(3)
+      sleep(2)
     end
   end
 end
