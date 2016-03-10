@@ -14,9 +14,9 @@ class Admin::UsersController < AdminController
   end
 
   def show
-    @user = User.find(params[:id])    
+    @user = User.find(params[:id])
 
-    # FIXME
+    # get user by uid
     # @user = User.find_by(uid: params[:id])
 
     respond_to do |format|

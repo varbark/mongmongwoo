@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 if ENV["RAILS_ENV"] == "development"
-  ruby '2.1.2'
+  ruby '2.2.2'
 elsif ENV["RAILS_ENV"] == "production"
   ruby '2.2.4'
 end
@@ -19,6 +19,13 @@ gem "paranoia", "~> 2.0" # 軟刪除
 gem 'carrierwave'
 gem 'mini_magick'
 
+# For carawl cvs data setup
+gem 'nokogiri'
+gem 'therubyracer'
+gem 'rspec-rails'
+gem 'capybara'
+gem 'selenium-webdriver'
+
 # Deploy
 # gem 'capistrano', '~> 3.1.0'
 # gem 'capistrano-bundler', '~> 1.1.2'
@@ -34,6 +41,7 @@ group :development do
   gem "binding_of_caller"
   gem 'meta_request'
   gem 'faker'
+  gem 'pry-rails'
 
   #Capistrano setup
   gem 'capistrano', '~> 3.4'
