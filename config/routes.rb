@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       #   get "/:uid", to: "users#check_user"
       # end
     end
+    resources :orders
 
     get "users/show_uid/:uid", to: "users#show_uid", as: "uid_user"
   end
