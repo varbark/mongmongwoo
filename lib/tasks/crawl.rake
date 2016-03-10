@@ -160,14 +160,14 @@ namespace :crawl do
 
     # County.all.each do |county|
     # 找特定縣市
-    county = County.all.find(1)
+    county = County.all.find(4)
       find_button("#{county.name}").click
       sleep(1)
 
-      # towns = county.towns
-      # towns.each do |town|
+      towns = county.towns
+      towns.each do |town|
       # 找特定鄉鎮
-      town = county.towns.find(7)
+      # town = county.towns.find(12)
         find_button("#{town.name}").click
         sleep(1)
 
@@ -222,9 +222,9 @@ namespace :crawl do
           sleep(1)
         end
 
-        # find_button("上一步").click
-        # sleep(2)
-      # end
+        find_button("上一步").click
+        sleep(2)
+      end
 
       # find_button("上一步").click
       # sleep(2)
