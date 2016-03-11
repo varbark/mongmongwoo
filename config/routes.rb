@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     get "users/show_uid/:uid", to: "users#show_uid", as: "uid_user"    
   end
 
-  namespace :cs_api do
+  namespace :cs_api, defaults: {format: 'json'} do
     # /county_id/town_id/store_id
 
     # APP: request  county_id

@@ -5,8 +5,10 @@ class CsApi::RoadsController < CsApiController
   def index
     @roads = @town.roads
 
-    respond_to do |format|
-      format.json { render json: @roads }
-    end
+    render json: @roads, only: [:id, :name]
+
+    # respond_to do |format|
+    #   format.json { render json: @roads }
+    # end
   end
 end

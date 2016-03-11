@@ -6,8 +6,10 @@ class CsApi::StoresController < CsApiController
   def index
     @stores = @road.stores
 
-    respond_to do |format|
-      format.json { render json: @stores }
-    end
+    render json: @stores, only: [:id, :store_code, :name, :address, :phone]
+
+    # respond_to do |format|
+    #   format.json { render json: @stores }
+    # end
   end
 end
