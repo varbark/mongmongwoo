@@ -21,7 +21,7 @@ gem 'mini_magick'
 
 # For carawl cvs data setup
 gem 'nokogiri'
-gem 'therubyracer'
+# gem 'therubyracer'
 gem 'rspec-rails'
 gem 'capybara'
 gem 'selenium-webdriver'
