@@ -448,7 +448,7 @@ namespace :crawl do
     stores = page_no.css(".cssTR")
     stores.each do |store|
       store_name = store.css(".cssTDTitle").children[0].to_s
-      store_code = store.css(".cssTDData")[0].children[0].to_s.gsub("門市服務代號:", "")
+      store_code = store.css(".cssTDData")[0].children[0].to_s.gsub("門市服務代號：", "")
       store_address = store.css(".cssTDData")[1].children[0].to_s.gsub("地址：", "")
       store_phone = store.css(".cssTDData")[2].children[0].to_s.gsub("電話：", "")
       puts store_name
