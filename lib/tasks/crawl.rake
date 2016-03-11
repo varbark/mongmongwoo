@@ -145,7 +145,7 @@ namespace :crawl do
           stores = page_no.css(".cssTR")
           stores.each do |store|
             store_name = store.css(".cssTDTitle").children[0].to_s
-            store_code = store.css(".cssTDData")[0].children[0].to_s.gsub("門市服務代號:", "")
+            store_code = store.css(".cssTDData")[0].children[0].to_s.gsub("門市服務代號：", "")
             store_address = store.css(".cssTDData")[1].children[0].to_s.gsub("地址：", "")
             store_phone = store.css(".cssTDData")[2].children[0].to_s.gsub("電話：", "")
             puts store_name
@@ -226,7 +226,7 @@ namespace :crawl do
           stores = page_no.css(".cssTR")
           stores.each do |store|
             store_name = store.css(".cssTDTitle").children[0].to_s
-            store_code = store.css(".cssTDData")[0].children[0].to_s.gsub("門市服務代號:", "")
+            store_code = store.css(".cssTDData")[0].children[0].to_s.gsub("門市服務代號：", "")
             store_address = store.css(".cssTDData")[1].children[0].to_s.gsub("地址：", "")
             store_phone = store.css(".cssTDData")[2].children[0].to_s.gsub("電話：", "")
             puts store_name
@@ -307,7 +307,7 @@ namespace :crawl do
           stores = page_no.css(".cssTR")
           stores.each do |store|
             store_name = store.css(".cssTDTitle").children[0].to_s
-            store_code = store.css(".cssTDData")[0].children[0].to_s.gsub("門市服務代號:", "")
+            store_code = store.css(".cssTDData")[0].children[0].to_s.gsub("門市服務代號：", "")
             store_address = store.css(".cssTDData")[1].children[0].to_s.gsub("地址：", "")
             store_phone = store.css(".cssTDData")[2].children[0].to_s.gsub("電話：", "")
             puts store_name
@@ -362,57 +362,57 @@ namespace :crawl do
   
     # 找特定鄉鎮
     town = county.towns.find(args.town_id)
-      find_button("#{town.name}").click
-      sleep(1)
+    find_button("#{town.name}").click
+    sleep(1)
 
-      roads = town.roads
-      roads.each do |road|
-      # 找特定路段
-      # road = town.roads.find(args.road_id)
-      find_button("#{road.name}").click
-      sleep(1)
-      begin
-        find_button("關閉").click
+    roads = town.roads
+    roads.each do |road|
+        find_button("#{road.name}").click
         sleep(1)
-      rescue Exception => e        
-      end
 
-      page_no = Nokogiri::HTML(page.html)
-      stores = page_no.css(".cssTR")
-      stores.each do |store|
-        store_name = store.css(".cssTDTitle").children[0].to_s
-        store_code = store.css(".cssTDData")[0].children[0].to_s.gsub("門市服務代號:", "")
-        store_address = store.css(".cssTDData")[1].children[0].to_s.gsub("地址：", "")
-        store_phone = store.css(".cssTDData")[2].children[0].to_s.gsub("電話：", "")
-        puts store_name
-        puts store_code
-        puts store_address
-        puts store_phone
-        the_store = Store.new
-        the_store.county_id = county.id
-        the_store.town_id = town.id
-        the_store.road_id = road.id
-        the_store.store_code = store_code
-        the_store.name = store_name
-        the_store.address = store_address
-        the_store.phone = store_phone
-
-        if store_name.index("全家")
-          the_store.store_type = 1
-        elsif store_name.index("OK")
-          the_store.store_type = 2
-        elsif store_name.index("萊爾富")
-          the_store.store_type = 3
+        begin
+          find_button("關閉").click
+          sleep(1)
+        rescue Exception => e
         end
 
-        the_store.save!
-      end
+        page_no = Nokogiri::HTML(page.html)
+        stores = page_no.css(".cssTR")
+        stores.each do |store|
+          store_name = store.css(".cssTDTitle").children[0].to_s
+          store_code = store.css(".cssTDData")[0].children[0].to_s.gsub("門市服務代號：", "")
+          store_address = store.css(".cssTDData")[1].children[0].to_s.gsub("地址：", "")
+          store_phone = store.css(".cssTDData")[2].children[0].to_s.gsub("電話：", "")
+          puts store_name
+          puts store_code
+          puts store_address
+          puts store_phone
+          the_store = Store.new
+          the_store.county_id = county.id
+          the_store.town_id = town.id
+          the_store.road_id = road.id
+          the_store.store_code = store_code
+          the_store.name = store_name
+          the_store.address = store_address
+          the_store.phone = store_phone
+
+          if store_name.index("全家")
+            the_store.store_type = 1
+          elsif store_name.index("OK")
+            the_store.store_type = 2
+          elsif store_name.index("萊爾富")
+            the_store.store_type = 3
+          end
+
+          the_store.save!
+        end
 
       find_button("上一步").click
       sleep(1)
     end
   end
 
+  # 指定路段
   task :crawl_stores_params_road, [:county_id, :town_id, :road_id] => :environment do |task, args|
     desc "Passing county_id, town_id, and road_id to crawl specified cv stores data"
     include Capybara::DSL
