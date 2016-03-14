@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314053247) do
+ActiveRecord::Schema.define(version: 20160314083843) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20160314053247) do
     t.datetime "updated_at",                  null: false
     t.integer  "ship_store_code", limit: 4
     t.string   "ship_phone",      limit: 255
+    t.integer  "ship_store_id",   limit: 4
   end
 
   add_index "order_infos", ["order_id"], name: "index_order_infos_on_order_id", using: :btree
@@ -88,6 +89,9 @@ ActiveRecord::Schema.define(version: 20160314053247) do
     t.integer  "status",         limit: 4,   default: 0
     t.string   "payment_method", limit: 255
     t.string   "token",          limit: 255
+    t.string   "uid",            limit: 255
+    t.integer  "ship_fee",       limit: 4
+    t.integer  "items_price",    limit: 4
   end
 
   add_index "orders", ["deleted_at"], name: "index_orders_on_deleted_at", using: :btree
