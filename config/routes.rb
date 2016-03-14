@@ -40,4 +40,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :order_api, defaults: { format: 'json' } do
+
+  end
 end
