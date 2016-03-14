@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
 
   enum status: { disable: 0, enable: 1 }
 
+  acts_as_paranoid
+
   validates_presence_of :user_name, :uid
   validates_presence_of :real_name, allow_blank: true
   validates_presence_of :gender, allow_blank: true

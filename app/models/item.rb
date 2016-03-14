@@ -18,6 +18,8 @@ class Item < ActiveRecord::Base
 
   enum status: { disable: 0, enable: 1 }
 
+  acts_as_paranoid
+
   has_many :photos
   has_many :item_categories
   has_many :categories, through: :item_categories
