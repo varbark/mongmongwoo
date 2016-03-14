@@ -1,4 +1,4 @@
-class CsApi::RoadsController < CsApiController
+class Api::V1::RoadsController < ApiController
   before_action :find_county, only: [:index]
   before_action :find_town, only: [:index]
 
@@ -6,9 +6,5 @@ class CsApi::RoadsController < CsApiController
     @roads = @town.roads
 
     render json: @roads, only: [:id, :name]
-
-    # respond_to do |format|
-    #   format.json { render json: @roads }
-    # end
   end
 end
