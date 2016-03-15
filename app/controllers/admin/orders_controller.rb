@@ -8,12 +8,22 @@ class Admin::OrdersController < AdminController
     end
   end
 
+  def order_info_list
+    @order = Order.find(params[:id])
+    @info = @order.info
+  end
+
+  def order_items_list    
+  end
+
   def show
     @order = Order.find(params[:id])
+    @info = @order.info
+    @items = @order.items
 
     respond_to do |format|
       format.html
       format.json { render json: @order }
     end
-  end
+  end  
 end

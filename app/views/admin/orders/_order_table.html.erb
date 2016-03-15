@@ -5,7 +5,6 @@
         <th>編號</th>
         <th>訂購用戶</th>
         <th>總金額</th>
-        <th>付款狀態</th>
         <th>訂單狀態</th>
         <th>收件明細</th>
         <th>商品明細</th>
@@ -18,10 +17,68 @@
           <td><%= order.id %></td>
           <td><%= order.user.user_name %></td>
           <td><%= order.total %></td>
-          <td><%= order.is_paid %></td>
-          <td><%= order.status %></td>
-          <td><%= order.info %></td>
-          <td><%= order.items %></td>          
+          <td><%= order_status(order.status) %></td>
+          <!-- TODO -->
+          <td>
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#order-<%= order.id %>-info">
+              查看收件明細
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="order-<%= order.id %>-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">收件人明細</h4>
+                  </div>
+                  <div class="modal-body">
+                    <ul>
+                      <% if order.info %>
+                        <li>收件人姓名： <%= order.info.ship_name %></li>
+                        <li>聯絡電話： <%= order.info.ship_phone %></li>
+                        <li>門市店號： <%= order.info.ship_store_code %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <!-- TODO -->
+          <td>
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#order-<%= order.id %>-items">
+              查看商品明細
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="order-<%= order.id %>-items" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">商品明細</h4>
+                  </div>
+                  <div class="modal-body">
+                    <ul>
+                      <% if order.items %>
+                        <% order.items.each do |item| %>
+                          <li>商品名稱： <%= item.item_name %></li>
+                          <li>購買數量： <%= item.item_quantity %></li>
+                          <li>商品單價： <%= item.item_price %></li>
+                        <% end %>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+
           <td>
             <li><%= link_to "查看" %></li>
             <li><%= link_to "編輯" %></li>

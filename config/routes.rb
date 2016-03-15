@@ -23,7 +23,11 @@ Rails.application.routes.draw do
         end
       end
     end
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:index, :show] do
+      member do
+        get "order_info_list"
+      end
+    end
   end
 
   namespace :api do
