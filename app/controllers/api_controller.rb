@@ -1,4 +1,4 @@
-class CsApiController < ApplicationController
+class ApiController < ActionController::Base
   def find_county
     @county = County.all.find(params[:county_id])
   end
