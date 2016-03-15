@@ -21,7 +21,6 @@ class Api::V1::OrdersController < ApiController
 
       # 商品明細 OrderItem
       params[:products].each do |product|
-        binding.pry
         item = OrderItem.new
         item.order_id = order.id
         item.item_name = product[:name]
