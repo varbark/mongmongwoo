@@ -1,0 +1,34 @@
+<div class="panel-body">
+  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+    <thead>      
+      <tr>
+        <th>編號</th>
+        <th>訂購用戶</th>
+        <th>總金額</th>
+        <th>付款狀態</th>
+        <th>訂單狀態</th>
+        <th>收件明細</th>
+        <th>商品明細</th>
+        <th>操作選項</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.user.user_name %></td>
+          <td><%= order.total %></td>
+          <td><%= order.is_paid %></td>
+          <td><%= order.status %></td>
+          <td><%= order.info %></td>
+          <td><%= order.items %></td>          
+          <td>
+            <li><%= link_to "查看" %></li>
+            <li><%= link_to "編輯" %></li>
+            <li><%= link_to "刪除" %></li>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
