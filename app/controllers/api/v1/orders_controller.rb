@@ -11,7 +11,8 @@ class Api::V1::OrdersController < ApiController
       order.save!
 
       # 收件資訊 OrderInfo
-      info = order.info.new
+      info = OrderInfo.new
+      info.order_id = order.id
       info.ship_name = params[:ship_name]
       info.ship_phone = params[:ship_phone]
       info.ship_store_code = params[:ship_store_code]
@@ -20,7 +21,9 @@ class Api::V1::OrdersController < ApiController
 
       # 商品明細 OrderItem
       params[:products].each do |product|
-        item = order.items.new
+        binding.pry
+        item = OrderItem.new
+        item.order_id = order.id
         item.item_name = product[:name]
         item.item_quantity = product[:quantity]
         item.item_price = product[:price]

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
   end
 
-  namespace :api, defaults: {format: 'json'} do
+  namespace :api do
     namespace :v1 do
 
       # 訂單API
