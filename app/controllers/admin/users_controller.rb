@@ -5,7 +5,7 @@ class Admin::UsersController < AdminController
   skip_before_action :verify_authenticity_token, only: [:import_user]
 
   def index
-    @users = User.recent
+    @users = User.includes(:orders).recent
 
     respond_to do |format|
       format.html

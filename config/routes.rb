@@ -25,13 +25,18 @@ Rails.application.routes.draw do
     end
     resources :orders, only: [:index, :show] do
       member do
-        get "order_info_list"
+        post "item_shipping"
+        post "item_shipped"
+        post "order_cancelled"
       end
     end
   end
 
   namespace :api do
     namespace :v1 do
+      # TODO
+      # 用戶API
+      resources :users, only: [:create, :show]
 
       # 訂單API
       resources :orders, only: [:create]

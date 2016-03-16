@@ -15,74 +15,31 @@
       <% @orders.each do |order| %>
         <tr>
           <td><%= order.id %></td>
-          <td><%= order.user.user_name %></td>
+          <td><%= link_to order.info_user_name, admin_user_path(order.user) %></td>
           <td><%= order.total %></td>
-          <td><%= order_status(order.status) %></td>
-          <!-- TODO -->
           <td>
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#order-<%= order.id %>-info">
-              查看收件明細
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="order-<%= order.id %>-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">收件人明細</h4>
-                  </div>
-                  <div class="modal-body">
-                    <ul>
-                      <% if order.info %>
-                        <li>收件人姓名： <%= order.info.ship_name %></li>
-                        <li>聯絡電話： <%= order.info.ship_phone %></li>
-                        <li>門市店號： <%= order.info.ship_store_code %></li>
-                      <% end %>
-                    </ul>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <%= link_to "新增訂單", "#", class: "btn btn-default #{order.status == "order_placed" ? "btn-lg" : "btn-xs"}" %>
+            <%= link_to "已出貨", item_shipping_admin_order_path(order), method: :post, class: "btn #{order.status == "item_shipping" ? "btn-primary btn-lg" : "btn-default btn-xs"}" %>
+            <%= link_to "完成取貨", item_shipped_admin_order_path(order), method: :post, class: "btn #{order.status == "item_shipped" ? "btn-success btn-lg" : "btn-default btn-xs"}" %>
+            <%= link_to "訂單取消", order_cancelled_admin_order_path(order), method: :post, class: "btn #{order.status == "order_cancelled" ? "btn-warning btn-lg" : "btn-default btn-xs"}" %>
           </td>
-          <!-- TODO -->
+
+          <!-- 收件明細 -->
           <td>
-            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#order-<%= order.id %>-items">
-              查看商品明細
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="order-<%= order.id %>-items" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">商品明細</h4>
-                  </div>
-                  <div class="modal-body">
-                    <ul>
-                      <% if order.items %>
-                        <% order.items.each do |item| %>
-                          <li>商品名稱： <%= item.item_name %></li>
-                          <li>購買數量： <%= item.item_quantity %></li>
-                          <li>商品單價： <%= item.item_price %></li>
-                        <% end %>
-                      <% end %>
-                    </ul>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <%= render partial: "info_list", locals: { order: order } %>
+          </td>
+
+          <!-- 商品明細 -->
+          <td>
+            <%= render partial: "items_list", locals: { order: order } %>
           </td>
 
           <td>
-            <li><%= link_to "查看" %></li>
-            <li><%= link_to "編輯" %></li>
-            <li><%= link_to "刪除" %></li>
+            <ul class="list-unstyled">
+              <li><%= link_to "查看" %></li>
+              <li><%= link_to "編輯" %></li>
+              <li><%= link_to "刪除" %></li>
+            </ul>
           </td>
         </tr>
       <% end %>
