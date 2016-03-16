@@ -9,5 +9,15 @@ class Order < ActiveRecord::Base
   has_many :items, class_name: "OrderItem", dependent: :destroy
   has_one :info, class_name: "OrderInfo", dependent: :destroy
 
-  accepts_nested_attributes_for :info
+  def info_store_code
+    info.ship_store_code
+  end
+
+  def info_store_name(store_code)
+    Store.find_by(store_code: store_code).name
+  end
+
+  def info_store_address(store_code)
+    Store.find_by(store_code: store_code).address
+  end
 end
