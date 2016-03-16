@@ -9,7 +9,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def store_dir
     if Rails.env.production?
-      "/home/deploy/monmonhouse/shared/public/assets/images/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+      "RAILS_ROOT/storage/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     elsif Rails.env.development?
       "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     end
