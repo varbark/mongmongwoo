@@ -2,7 +2,7 @@ class Admin::OrdersController < AdminController
   before_action :find_order, only: [:show, :item_shipping, :item_shipped, :order_cancelled]
 
   def index
-    @orders = Order.recent
+    @orders = Order.includes(:user, :info, :items).recent
 
     respond_to do |format|
       format.html

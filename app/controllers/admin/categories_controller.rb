@@ -3,7 +3,7 @@ class Admin::CategoriesController < AdminController
   before_action :find_category, only: [:show]
 
   def index
-    @categories = Category.recent
+    @categories = Category.includes(:items, :item_categories).recent
 
     # respond_to do |format|
     #   format.html

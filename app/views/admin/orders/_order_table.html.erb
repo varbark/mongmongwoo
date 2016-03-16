@@ -15,7 +15,7 @@
       <% @orders.each do |order| %>
         <tr>
           <td><%= order.id %></td>
-          <td><%= order.user.user_name %></td>
+          <td><%= link_to order.info_user_name, admin_user_path(order.user) %></td>
           <td><%= order.total %></td>
           <td>
             <%= link_to "新增訂單", "#", class: "btn btn-default #{order.status == "order_placed" ? "btn-lg" : "btn-xs"}" %>

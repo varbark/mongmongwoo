@@ -1,6 +1,6 @@
 class Api::V1::CountiesController < ApiController
   def index
-    @counties = County.all
+    @counties = County.includes(:towns, :stores).all
 
     render json: @counties, only: [:id, :name]
   end

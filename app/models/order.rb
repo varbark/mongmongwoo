@@ -20,4 +20,8 @@ class Order < ActiveRecord::Base
   def info_store_address(store_code)
     Store.find_by(store_code: store_code).address
   end
+
+  def info_user_name
+    user.user_name
+  end
 end
