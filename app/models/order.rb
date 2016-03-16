@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
 
   acts_as_paranoid
 
-  enum status: { order_placed: 0, paid: 1, shipping: 2, shipped: 3, order_cancelled: 4, good_returned: 5 }
+  enum status: { order_placed: 0, item_shipping: 1, item_shipped: 2, order_cancelled: 3 }
 
   belongs_to :user
   has_many :items, class_name: "OrderItem", dependent: :destroy

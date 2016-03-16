@@ -17,20 +17,29 @@
           <td><%= order.id %></td>
           <td><%= order.user.user_name %></td>
           <td><%= order.total %></td>
-          <td><%= order_status(order.status) %></td>
-          <!-- TODO -->
+          <td>
+            <%= link_to "新增訂單", "#", class: "btn btn-default #{order.status == "order_placed" ? "btn-lg" : "btn-xs"}" %>
+            <%= link_to "已出貨", item_shipping_admin_order_path(order), method: :post, class: "btn #{order.status == "item_shipping" ? "btn-primary btn-lg" : "btn-default btn-xs"}" %>
+            <%= link_to "完成取貨", item_shipped_admin_order_path(order), method: :post, class: "btn #{order.status == "item_shipped" ? "btn-success btn-lg" : "btn-default btn-xs"}" %>
+            <%= link_to "訂單取消", order_cancelled_admin_order_path(order), method: :post, class: "btn #{order.status == "order_cancelled" ? "btn-warning btn-lg" : "btn-default btn-xs"}" %>
+          </td>
+
+          <!-- 收件明細 -->
           <td>
             <%= render partial: "info_list", locals: { order: order } %>
           </td>
-          <!-- TODO -->
+
+          <!-- 商品明細 -->
           <td>
             <%= render partial: "items_list", locals: { order: order } %>
           </td>
 
           <td>
-            <li><%= link_to "查看" %></li>
-            <li><%= link_to "編輯" %></li>
-            <li><%= link_to "刪除" %></li>
+            <ul class="list-unstyled">
+              <li><%= link_to "查看" %></li>
+              <li><%= link_to "編輯" %></li>
+              <li><%= link_to "刪除" %></li>
+            </ul>
           </td>
         </tr>
       <% end %>

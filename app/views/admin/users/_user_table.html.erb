@@ -22,11 +22,13 @@
           <td><%= user.gender %></td>
           <td><%= user.phone %></td>
           <td><%= user.address %></td>
-          <td>         
-            <!-- <li><%= link_to "查看", admin_user_path(user.uid) %></li> -->
-            <li><%= link_to "查看", admin_user_path(user) %></li>
-            <li><%= link_to "編輯" %></li>
-            <li><%= link_to "刪除" %></li>
+          <td>
+            <ul class="list-unstyled">
+              <!-- <li><%= link_to "查看", admin_user_path(user.uid) %></li> -->
+              <li><%= link_to "查看", admin_user_path(user) %></li>
+              <li><%= link_to "編輯" %></li>
+              <li><%= link_to "刪除" %></li>
+            </ul>
           </td>
         </tr>
       <% end %>
