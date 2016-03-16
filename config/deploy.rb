@@ -7,7 +7,7 @@ set :repo_url, 'git@github.com:KosbrotherSchool/mongmongwoo.git'
 set :deploy_to, '/home/deploy/monmonhouse'
 
 set :linked_files, %w{config/database.yml config/secrets.yml}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system storage}
 
 role :web, %w{deploy@106.185.34.142}
 
