@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       # TODO
       # 用戶API
-      resources :users, only: [:create]
+      resources :users, only: [:create, :show]
 
       # 訂單API
       resources :orders, only: [:create]

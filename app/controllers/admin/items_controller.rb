@@ -1,5 +1,4 @@
 class Admin::ItemsController < AdminController
-  layout "admin"
   before_action :find_item, only: [:show, :edit, :update, :destroy]
 
   def index
