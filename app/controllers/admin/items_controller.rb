@@ -44,7 +44,7 @@ class Admin::ItemsController < AdminController
   def update
     if @item.update(item_params)
       flash[:notice] = "成功更新商品"
-      redirect_to admin_categories_path
+      redirect_to admin_item_path(@item)
     else
       flash.now[:alert] = "請確認欄位名稱"
       render :edit
@@ -60,7 +60,7 @@ class Admin::ItemsController < AdminController
   private
 
   def item_params
-    params.require(:item).permit(:name, :price, :image, :slug, :description, category_ids: [], :photos_attributes => ["image"])
+    params.require(:item).permit(:name, :price, :image, :slug, :description, category_ids: [], :photos_attributes => ["image", "photo_intro"])
   end
 
   def find_item
