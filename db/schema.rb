@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317102142) do
+ActiveRecord::Schema.define(version: 20160317102144) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 20160317102142) do
   create_table "items", force: :cascade do |t|
     t.string   "name",        limit: 255,               null: false
     t.integer  "price",       limit: 4,                 null: false
-    t.string   "image",       limit: 255
     t.string   "slug",        limit: 255
     t.integer  "status",      limit: 4,     default: 0
     t.datetime "deleted_at"
@@ -116,11 +115,12 @@ ActiveRecord::Schema.define(version: 20160317102142) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
-    t.integer  "item_id",    limit: 4
-    t.string   "image",      limit: 255
+    t.integer  "item_id",     limit: 4
+    t.string   "image",       limit: 255
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_intro", limit: 255
   end
 
   add_index "photos", ["deleted_at"], name: "index_photos_on_deleted_at", using: :btree

@@ -34,7 +34,7 @@ class Admin::ItemsController < AdminController
 
     respond_to do |format|
       format.html
-      format.json { render :json =>  item_arr, except: [ :slug, :status, :deleted_at, :created_at, :updated_at] }
+      format.json { render :json =>  item_arr, except: [ :slug, :status, :deleted_at, :created_at, :updated_at ] }
     end
   end
 
