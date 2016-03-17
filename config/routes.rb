@@ -1,7 +1,10 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do  
   namespace :admin do
     root "items#index"
-    resources :items
+    resources :items do
+      mount Ckeditor::Engine => '/ckeditor'
+    end
+    
     resources :categories, only: [:new, :create, :show, :index]
     resources :users, only: [:index, :show] do
       collection do

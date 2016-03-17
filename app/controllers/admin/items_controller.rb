@@ -28,9 +28,13 @@ class Admin::ItemsController < AdminController
   end
 
   def show
+    item_arr = Array.new
+    item_arr << @item
+    item_arr << @photos
+
     respond_to do |format|
       format.html
-      format.json { render :json => @item }
+      format.json { render :json =>  item_arr, except: [ :slug, :status, :deleted_at, :created_at, :updated_at ] }
     end
   end
 
@@ -40,7 +44,7 @@ class Admin::ItemsController < AdminController
   def update
     if @item.update(item_params)
       flash[:notice] = "成功更新商品"
-      redirect_to admin_categories_path
+      redirect_to admin_item_path(@item)
     else
       flash.now[:alert] = "請確認欄位名稱"
       render :edit
@@ -56,10 +60,11 @@ class Admin::ItemsController < AdminController
   private
 
   def item_params
-    params.require(:item).permit(:name, :price, :image, :slug, category_ids: [], :photos_attributes => ["image"])
+    params.require(:item).permit(:name, :price, :image, :slug, :description, category_ids: [], :photos_attributes => ["image", "photo_intro"])
   end
 
   def find_item
-    @item = Item.find(params[:id])
+    @item = Item.includes(:photos).find(params[:id])
+    @photos = @item.photos
   end
 end

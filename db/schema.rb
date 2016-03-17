@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314083843) do
+ActiveRecord::Schema.define(version: 20160317102145) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -23,6 +23,23 @@ ActiveRecord::Schema.define(version: 20160314083843) do
   end
 
   add_index "categories", ["deleted_at"], name: "index_categories_on_deleted_at", using: :btree
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_id",           limit: 255, null: false
+    t.string   "data_filename",     limit: 255, null: false
+    t.integer  "data_size",         limit: 4
+    t.string   "data_content_type", limit: 255
+    t.integer  "assetable_id",      limit: 4
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width",             limit: 4
+    t.integer  "height",            limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "counties", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -43,14 +60,14 @@ ActiveRecord::Schema.define(version: 20160314083843) do
   add_index "item_categories", ["item_id"], name: "index_item_categories_on_item_id", using: :btree
 
   create_table "items", force: :cascade do |t|
-    t.string   "name",       limit: 255,             null: false
-    t.integer  "price",      limit: 4,               null: false
-    t.string   "image",      limit: 255
-    t.string   "slug",       limit: 255
-    t.integer  "status",     limit: 4,   default: 0
+    t.string   "name",        limit: 255,               null: false
+    t.integer  "price",       limit: 4,                 null: false
+    t.string   "slug",        limit: 255
+    t.integer  "status",      limit: 4,     default: 0
     t.datetime "deleted_at"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.text     "description", limit: 65535
   end
 
   add_index "items", ["deleted_at"], name: "index_items_on_deleted_at", using: :btree
@@ -98,11 +115,12 @@ ActiveRecord::Schema.define(version: 20160314083843) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
-    t.integer  "item_id",    limit: 4
-    t.string   "image",      limit: 255
+    t.integer  "item_id",     limit: 4
+    t.string   "image",       limit: 255
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_intro", limit: 255
   end
 
   add_index "photos", ["deleted_at"], name: "index_photos_on_deleted_at", using: :btree
@@ -125,6 +143,8 @@ ActiveRecord::Schema.define(version: 20160314083843) do
     t.string   "phone",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.float    "lat",        limit: 24
+    t.float    "lng",        limit: 24
   end
 
   create_table "towns", force: :cascade do |t|
