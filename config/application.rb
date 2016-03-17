@@ -26,6 +26,8 @@ module Monmonhouse
     # 修正無法在 console 下讀取 uploader.rb 問題
     config.autoload_paths += %W(#{config.root}/app/uploaders)
 
+    config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+
     Capybara.register_driver :selenium_chrome do |app|
       http_client = Selenium::WebDriver::Remote::Http::Default.new
       http_client.timeout = 300
