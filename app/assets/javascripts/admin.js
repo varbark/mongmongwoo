@@ -5,3 +5,4 @@
 //= require custom
 //= require jquery.dataTables.min
 //= require dataTables.bootstrap
+//= require ckeditor/init

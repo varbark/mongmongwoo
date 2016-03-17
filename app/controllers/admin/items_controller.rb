@@ -28,9 +28,13 @@ class Admin::ItemsController < AdminController
   end
 
   def show
+    item_arr = Array.new
+    item_arr << @item
+    item_arr << @photos
+
     respond_to do |format|
       format.html
-      format.json { render :json => @item }
+      format.json { render :json =>  item_arr, except: [ :slug, :status, :deleted_at, :created_at, :updated_at] }
     end
   end
 
@@ -60,6 +64,7 @@ class Admin::ItemsController < AdminController
   end
 
   def find_item
-    @item = Item.find(params[:id])
+    @item = Item.includes(:photos).find(params[:id])
+    @photos = @item.photos
   end
 end

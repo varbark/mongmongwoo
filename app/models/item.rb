@@ -27,6 +27,10 @@ class Item < ActiveRecord::Base
   accepts_nested_attributes_for :photos
 
   def default_photo
-    photos.first
+    photos.first.image.url
+  end
+
+  def intro_cover
+    photos.first.image.medium.url
   end
 end

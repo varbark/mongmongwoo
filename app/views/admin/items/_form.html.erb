@@ -40,7 +40,7 @@
           <div class="form-group">            
             <%= f.label :description, "商品描述", class: "col-sm-2 control-label" %>    
             <div class="col-sm-10">
-              <%= f.text_area :description, rows: 6, class: "form-control", placeholder: "請輸入描述", required: true %>
+              <%= f.cktext_area :description, rows: 6, class: "form-control", placeholder: "請輸入描述", :ckeditor => {:language => 'zh-TW'}, required: true %>
             </div>
           </div>
 

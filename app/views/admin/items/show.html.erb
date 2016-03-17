@@ -1,18 +1,29 @@
 <div clas="row">
   <div class="content-box-large">
-    <h2><%= @item.name %></h2>
-    <div class="item-price">
-      <p>NT<%= number_to_currency(@item.price) %></p>
-    </div>
-    <div class="item-description">
-      <p><%= @item.description %></p>
+    <div class="item-cover-words-intro">
+      <div class="cover-intro col-md-4">
+        <%= image_tag(@item.intro_cover) %>
+      </div>
+      <div class="words-intro col-md-7">
+        <dl class="dl-horizontal">
+          <dt>商品名稱</dt>
+          <dd><%= @item.name %></dd>
+          <dt>商品價格</dt>
+          <dd>NT<%= number_to_currency(@item.price) %></dd>
+          <dt>商品敘述</dt>
+          <dd><%= raw @item.description %></dd>
+        </dl>
+      </div>
     </div>
 
     <!-- TODO 改旋轉木馬顯示方式 -->
-    <% @item.photos.each do |photo| %>
-      <div class="item-photos-list">
-        <%= image_tag(photo.image.medium.url) if photo.present? %>
-      </div>  
-    <% end %>    
+    <div class="item-photos-display">
+      <p class="lead">商品圖片</p>
+      <% @item.photos.each do |photo| %>
+        <div class="item-photos-list">
+          <%= image_tag(photo.image.medium.url) if photo.present? %>
+        </div>  
+      <% end %>
+    </div>
   </div>
 </div>
