@@ -18,6 +18,7 @@ gem "font-awesome-rails"
 gem "paranoia", "~> 2.0" # 軟刪除
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'ckeditor'
 
 # For carawl cvs data setup
 gem 'nokogiri'

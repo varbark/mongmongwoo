@@ -56,7 +56,7 @@ class Admin::ItemsController < AdminController
   private
 
   def item_params
-    params.require(:item).permit(:name, :price, :image, :slug, category_ids: [], :photos_attributes => ["image"])
+    params.require(:item).permit(:name, :price, :image, :slug, :description, category_ids: [], :photos_attributes => ["image"])
   end
 
   def find_item
