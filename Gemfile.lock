@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: a2c93fe1a9d3a3f60d1662e5ec34fdba7bf2b304
+  specs:
+    carrierwave (0.10.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -72,11 +81,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    carrierwave (0.10.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     ckeditor (4.1.6)
@@ -239,7 +243,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.1, >= 1.1.6)
   capistrano-rbenv (~> 2.0, >= 2.0.4)
   capybara
-  carrierwave
+  carrierwave!
   ckeditor
   coffee-rails (~> 4.1.0)
   faker
