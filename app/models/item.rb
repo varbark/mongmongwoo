@@ -26,11 +26,19 @@ class Item < ActiveRecord::Base
 
   accepts_nested_attributes_for :photos
 
+  after_commit :remove_nil_of_image
+
   def default_photo
     photos.first.image.url
   end
 
   def intro_cover
     photos.first.image.medium.url
+  end
+
+  def remove_nil_of_image
+    self.photos.each do |photo|
+      photo.destroy if photo.image.blank?
+    end
   end
 end
