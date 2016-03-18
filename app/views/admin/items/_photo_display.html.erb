@@ -12,19 +12,23 @@
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <% @photos.each_with_index do |photo, index| %>
-      <li data-target="#carousel-example-generic" data-slide-to="<%= index %>" class="<%= "active" if index == 0 %>"></li>
+      <% unless photo.image.blank? %>
+        <li data-target="#carousel-example-generic" data-slide-to="<%= index %>" class="<%= "active" if index == 0 %>"></li>
+      <% end %>
     <% end %>
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <% @photos.each do |photo| %>
-      <div class="item <%= "active" if photo == @photos.first %>">
-        <%= image_tag(photo.image.medium.url) if photo.present? %>
-        <div class="carousel-caption">
-          <%= photo.photo_intro %>
+      <% unless photo.image.blank? %>
+        <div class="item <%= "active" if photo == @photos.first %>">
+          <%= image_tag(photo.image.medium.url) %>
+          <div class="carousel-caption">
+            <%= photo.photo_intro %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 

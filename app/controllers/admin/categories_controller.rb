@@ -28,11 +28,25 @@ class Admin::CategoriesController < AdminController
   end
 
   def show
+
+    # TODO 
+    # 移去用戶API
+    result_arr = []    
+    items = @category.items
+    items.each do |item|
+      item_hash = {}
+      item_hash[:id] = item.id
+      item_hash[:name] = item.name
+      item_hash[:price] = item.price
+      item_hash[:photo] = item.photos.first.image.url
+      result_arr << item_hash                    
+    end
+
     respond_to do |format|
       format.html
-      # format.json { render :json => @category }
-      format.json { render :json => @category.items }
+      format.json { render :json => result_arr }
     end
+
   end
 
   private

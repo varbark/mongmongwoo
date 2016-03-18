@@ -16,7 +16,7 @@ gem 'turbolinks'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem "paranoia", "~> 2.0" # 軟刪除
-gem 'carrierwave'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 gem 'ckeditor'
 
