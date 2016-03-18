@@ -18,14 +18,7 @@
     </div>
     <br>
     <!-- TODO 改旋轉木馬顯示方式 -->
-    <div class="item-photos-display">
-      <p class="lead">商品圖片</p>
-      <% @item.photos.each do |photo| %>
-        <div class="item-photos-list">
-          <%= photo.photo_intro %>
-          <%= image_tag(photo.image.medium.url) if photo.present? %>
-        </div>  
-      <% end %>
-    </div>
+    <p class="lead">商品圖片</p>
+    <%= render partial: "photo_display", locals: { item: @item, photos: @photos } %>
   </div>
 </div>
