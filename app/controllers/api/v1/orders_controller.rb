@@ -1,4 +1,5 @@
 class Api::V1::OrdersController < ApiController
+  # TODO 重構整理
   def create
     begin
       # 訂單 Order
@@ -33,5 +34,18 @@ class Api::V1::OrdersController < ApiController
     rescue Exception => e
       render json: "error"
     end
+  end
+
+  def index
+    orders = Order.includes(:user, :info, :items).all
+    render json: orders, only: [:id, :user_id, :total, :status, :uid]
+  end
+
+  def show
+    order = Order.includes(:user, :info, :items).find(params[:id])
+    info = order.info
+    items = order.items
+    result_order = order.generate_result_order(order, info, items)
+    render json: result_order
   end
 end
