@@ -11,9 +11,9 @@ class Api::V1::ItemsController < ApiController
     result_item[:name] = item.name
     result_item[:price] = item.price
     result_item[:description] = item.description
-    include_photos = []
-    pic = {}
+    include_photos = []    
     item.photos.each do |photo|
+      pic = {}
       pic[:image_url] = photo.image.medium.url
       pic[:photo_intro] = photo.photo_intro
       include_photos << pic
