@@ -20,9 +20,10 @@ class Item < ActiveRecord::Base
 
   acts_as_paranoid
 
-  has_many :photos
+  has_many :photos, dependent: :destroy
   has_many :item_categories
   has_many :categories, through: :item_categories
+  has_many :specs, class_name: "ItemSpec", dependent: :destroy
 
   accepts_nested_attributes_for :photos
 

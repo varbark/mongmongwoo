@@ -28,5 +28,5 @@ class User < ActiveRecord::Base
   validates_presence_of :address, allow_blank: true
   validates_presence_of :phone, allow_blank: true
 
-  has_many :orders
+  has_many :orders, dependent: :destroy
 end
