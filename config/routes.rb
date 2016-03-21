@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 
     resources :items do
       # TODO photos uploading
+      resources :photos, except: [:show]
 
-      resources :item_specs, except: [:edit]
+      resources :item_specs, except: [:show]
     end
     
     resources :categories, only: [:new, :create, :show, :index]
