@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
+  
   namespace :admin do
     root "items#index"
+
     resources :items
+    # TODO photos uploading
     
     resources :categories, only: [:new, :create, :show, :index]
     resources :users, only: [:index, :show] do
@@ -37,11 +40,17 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # TODO
+      # 分類API
+      resources :categories, only: [:index, :show]
+
+      # 商品API
+      resources :items, only: [:index, :show]
+
       # 用戶API
-      resources :users, only: [:create, :show]
+      resources :users, only: [:create, :show, :update]
 
       # 訂單API
-      resources :orders, only: [:create]
+      resources :orders, only: [:create, :show, :index]
 
       # 超商API
       resources :counties, only: [:index, :show] do

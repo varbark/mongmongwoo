@@ -34,4 +34,10 @@ class Api::V1::OrdersController < ApiController
       render json: "error"
     end
   end
+
+  def index
+  end
+
+  def show
+  end
 end

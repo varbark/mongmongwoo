@@ -28,14 +28,14 @@ class Admin::ItemsController < AdminController
   end
 
   def show
-    item_arr = Array.new
-    item_arr << @item
-    item_arr << @photos
+    # item_arr = Array.new
+    # item_arr << @item
+    # item_arr << @photos
 
-    respond_to do |format|
-      format.html
-      format.json { render :json =>  item_arr, except: [ :slug, :status, :deleted_at, :created_at, :updated_at ] }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render :json =>  item_arr, except: [ :slug, :status, :deleted_at, :created_at, :updated_at ] }
+    # end
   end
 
   def edit    
