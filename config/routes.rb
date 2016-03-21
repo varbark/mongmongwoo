@@ -13,14 +13,14 @@ Rails.application.routes.draw do
 
         # TODO
         # 外界POST request
-        post "import_user", to: "users#import_user"
+        # post "import_user", to: "users#import_user"
       end
 
       # member do
       #   get "/:uid", to: "users#check_user"
       # end
     end
-    get "users/show_uid/:uid", to: "users#show_uid", as: "uid_user"
+    # get "users/show_uid/:uid", to: "users#show_uid", as: "uid_user"
     resources :counties, only: [:index, :show] do
       resources :towns, only: [:index, :show] do
         resources :roads, only: [:index, :show] do
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      # TODO
+      # TODO 重構整理
       # 分類API
       resources :categories, only: [:index, :show]
 

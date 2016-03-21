@@ -24,4 +24,39 @@ class Order < ActiveRecord::Base
   def info_user_name
     user.user_name
   end
+
+  def generate_result_order(order, info, items)
+    # 訂單資料
+    result_order = {}
+    result_order[:id] = order.id
+    result_order[:uid] = order.uid
+    result_order[:user_id] = order.user_id
+    result_order[:status] = order.status
+    result_order[:items_price] = order.items_price
+    result_order[:ship_fee] = order.ship_fee
+    result_order[:total] = order.total
+  
+    # 收件明細
+    include_info = {}
+    include_info[:id] = info.id
+    include_info[:ship_name] = info.ship_name
+    include_info[:ship_phone] = info.ship_phone
+    include_info[:ship_store_code] = info.ship_store_code
+    include_info[:ship_store_id] = info.ship_store_id
+    result_order[:info] = include_info
+
+    # 商品明細
+    include_items = []
+    items.each do |item|
+      item_hash = {}
+      item_hash[:name] = item.item_name
+      item_hash[:quantity] = item.item_quantity
+      item_hash[:price] = item.item_price
+      include_items << item_hash
+    end
+    result_order[:items] = include_items
+
+    # 完整資料
+    return result_order
+  end
 end
