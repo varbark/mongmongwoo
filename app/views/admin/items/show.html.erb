@@ -30,11 +30,17 @@
     <!-- 樣式圖片 -->
     <div class="well">
       <p class="lead">樣式圖片</p>
-      <% @specs.each do |spec| %>
-        <%= spec_photo(spec) %>
-        <%= spec.style %>
-        <hr>
-      <% end %>
+      <dl class="dl-horizontal">
+        <% @specs.each do |spec| %>
+          <dt>樣式圖片</dt>
+          <dd><%= spec_photo(spec) %></dd>
+          <dt>樣式名稱</dt>
+          <dd><%= spec.style %></dd>  
+          <dt>樣式庫存</dt>
+          <dd><%= spec.style_amount %></dd>
+          <hr>          
+        <% end %>        
+      </dl>      
     </div>
   </div>
 </div>
