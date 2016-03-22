@@ -21,8 +21,26 @@
       </div>
     </div>
     <br>
-    <!-- TODO 改旋轉木馬顯示方式 -->
-    <p class="lead">商品圖片</p>
-    <%= render partial: "photo_display", locals: { item: @item, photos: @photos } %>
+    <!-- 商品圖片 -->
+    <div class="well">
+      <p class="lead">商品圖片</p>
+      <%= render partial: "photo_display", locals: { item: @item, photos: @photos } %>
+    </div>
+    <br>
+    <!-- 樣式圖片 -->
+    <div class="well">
+      <p class="lead">樣式圖片</p>
+      <dl class="dl-horizontal">
+        <% @specs.each do |spec| %>
+          <dt>樣式圖片</dt>
+          <dd><%= spec_photo(spec) %></dd>
+          <dt>樣式名稱</dt>
+          <dd><%= spec.style %></dd>  
+          <dt>樣式庫存</dt>
+          <dd><%= spec.style_amount %></dd>
+          <hr>          
+        <% end %>        
+      </dl>      
+    </div>
   </div>
 </div>

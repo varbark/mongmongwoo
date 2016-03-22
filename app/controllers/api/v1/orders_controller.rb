@@ -52,4 +52,9 @@ class Api::V1::OrdersController < ApiController
     result_order = order.generate_result_order(order, info, items)
     render json: result_order
   end
+
+  def user_owned_orders
+    user_orders = Order.includes(:user).where("uid = ?", params[:uid])
+    render json: user_orders, only: [:id, :uid, :total, :created_at, :status, :user_id]
+  end
 end

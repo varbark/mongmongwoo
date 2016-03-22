@@ -2,7 +2,7 @@ class Admin::ItemsController < AdminController
   before_action :find_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = Item.on_shelf.includes(:photos, :item_categories, :categories).recent
+    @items = Item.includes(:photos, :item_categories, :categories).recent
 
     respond_to do |format|
       format.html
@@ -66,5 +66,6 @@ class Admin::ItemsController < AdminController
   def find_item
     @item = Item.includes(:photos, :specs).find(params[:id])
     @photos = @item.photos
+    @specs = @item.specs
   end
 end
