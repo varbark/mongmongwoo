@@ -11,28 +11,35 @@
           </div>
         </div>
       <div class="panel-body">
-        <%= form_for [:admin, @item, @item_spec], html: { class: "form-horizontal" } do |f| %>
+        <%= form_for [:admin, @item, @item_spec], html: { multipart: true, class: "form-horizontal" } do |f| %>
 
           <div class="form-group">
             <%= f.label :style, "樣式名稱", class: "col-sm-2 control-label" %>            
             <div class="col-sm-10">
-              <%= f.text_field :style, class: "form-control", placeholder: "請輸入名稱", required: true %>
+              <%= f.text_field :style, class: "form-control", placeholder: "請輸入名稱" %>
             </div>
           </div>
 
           <div class="form-group">            
             <%= f.label :style_amount, "樣式數量", class: "col-sm-2 control-label" %>    
             <div class="col-sm-10">
-              <%= f.number_field :style_amount, class: "form-control", placeholder: "請輸入數量", required: true %>
+              <%= f.number_field :style_amount, class: "form-control", placeholder: "請輸入數量" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label "選擇樣式圖片", class: "col-sm-2 control-label" %>
+            <div class="col-sm-5">
+              <%= file_field_tag "images[]", { multiple: true,class: "form-control" } %>
             </div>
           </div>
           
-          <div class="form-group">
-            <%= f.label :style_pic, "上傳樣式圖片", class: "col-sm-2 control-label" %>
+          <!-- <div class="form-group">
+            <%= f.label :style_pic, "選擇樣式圖片", class: "col-sm-2 control-label" %>
             <div class="col-sm-5">
               <%= f.file_field :style_pic, class: "form-control" %>
             </div>
-          </div>
+          </div> -->
         
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

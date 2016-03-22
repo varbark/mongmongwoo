@@ -3,7 +3,7 @@ class ItemSpec < ActiveRecord::Base
 
   belongs_to :item
 
-  validates_presence_of :style, :style_amount
+  # validates_presence_of :style, :style_amount
 
   mount_uploader :style_pic, SpecPicUploader
 end

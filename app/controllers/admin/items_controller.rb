@@ -20,7 +20,7 @@ class Admin::ItemsController < AdminController
 
     if @item.save
       flash[:notice] = "新增商品成功"
-      redirect_to admin_categories_path
+      redirect_to admin_item_path(@item)
     else
       flash.now[:alert] = "請確認欄位資料"
       render :new

@@ -18,7 +18,7 @@ class Admin::PhotosController < AdminController
       end
       flash[:notice] = "圖片上傳完成"
       redirect_to admin_item_photos_path(@item)
-    rescue => e
+    rescue Exception => e
       flash.now[:alert] = "請確認上傳圖片是否正確"
     end
 

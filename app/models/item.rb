@@ -28,11 +28,11 @@ class Item < ActiveRecord::Base
   # after_commit :remove_nil_of_image
 
   def default_photo
-    photos.first.image.url
+    photos.first.image.url if self.photos.first
   end
 
   def intro_cover
-    photos.first.image.medium.url
+    photos.first.image.medium.url if self.photos.any?
   end
 
   def remove_nil_of_image

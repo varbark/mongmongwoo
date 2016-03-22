@@ -11,22 +11,34 @@ class Admin::ItemSpecsController < AdminController
   end
 
   def create
-    @item_spec = @item.specs.new(spec_params)
-
-    if @item_spec.save!
-      flash[:notice] = "成功新增樣式"
+    # 多圖上傳
+    begin
+      create_spec_params[:images].each do |image|
+        @item.specs.create!(style_pic: image)
+      end
+      flash[:notice] = "樣式圖片上傳完成"
       redirect_to admin_item_item_specs_path(@item)
-    else
-      flash[:alert] = "請確認所有欄位資料是否正確"
-      render :new
+    rescue Exception => e
+      flash.now[:alert] = "請確認上傳圖片是否正確"
     end
+
+    # 單張圖
+    # @item_spec = @item.specs.new(spec_params)
+
+    # if @item_spec.save!
+    #   flash[:notice] = "成功新增樣式"
+    #   redirect_to admin_item_item_specs_path(@item)
+    # else
+    #   flash[:alert] = "請確認所有欄位資料是否正確"
+    #   render :new
+    # end
   end
 
   def edit
   end
 
   def update
-    if @item_spec.update!(spec_params)
+    if @item_spec.update!(update_spec_params)
       flash[:notice] = "編輯完成"
       redirect_to admin_item_item_specs_path(@item)
     else
@@ -48,7 +60,11 @@ class Admin::ItemSpecsController < AdminController
     @item_spec = @item.specs.find(params[:id])
   end
 
-  def spec_params
+  def create_spec_params
+    params.require(:item_spec).permit(:style, :style_pic, :style_amount).merge!(images: params[:images])
+  end
+
+  def update_spec_params
     params.require(:item_spec).permit(:style, :style_pic, :style_amount)
   end
 end
