@@ -25,7 +25,9 @@
           <td><%= spec.style %></td>
           <td><%= spec.style_amount %></td>
           <td>
-            <%= link_to "編輯樣式", "#" %>
+            <%= button_tag "編輯", data: { toggle: "modal", target: "#spec-#{spec.id}-edit" }, type: "button", class: "btn btn-default btn-xs" %>
+            <%= render partial: "edit_form", locals: { spec: spec } %>
+            <%= link_to "刪除", admin_item_item_spec_path(@item, spec), method: :delete, data: { confirm: "確定刪除?", disable_with: "刪除中..." }, class: "btn btn-danger btn-xs" %>
           </td>
         </tr>
       <% end %>

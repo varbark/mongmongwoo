@@ -1,5 +1,6 @@
 class Admin::PhotosController < AdminController
   before_action :find_item
+  before_action :find_photo, only: [:edit, :update, :destroy]
 
   def index
     @photos = @item.photos
@@ -37,18 +38,36 @@ class Admin::PhotosController < AdminController
   end
 
   def update
+    if @photo.update!(update_photo_params)
+      flash[:notice] = "編輯完成"
+      redirect_to admin_item_photos_path(@item)
+    else
+      flash[:alert] = "請確認編輯內容是否正確"
+      render :edit
+    end
   end
 
   def destroy
+    @photo.destroy!
+    flash[:warning] = "圖片已刪除"
+    redirect_to admin_item_photos_path(@item)
   end
 
   private
 
   def find_item
-    @item = Item.find(params[:item_id])
+    @item = Item.on_shelf.includes(:photos).find(params[:item_id])
+  end
+
+  def find_photo
+    @photo = @item.photos.find(params[:id])
   end
 
   def create_photo_params
     params.require(:photo).permit(:image, :photo_intro).merge!(images: params[:images])
+  end
+
+  def update_photo_params
+    params.require(:photo).permit(:image, :photo_intro)
   end
 end

@@ -16,7 +16,7 @@
 class Item < ActiveRecord::Base
   scope :recent, -> { order(id: :DESC) }
 
-  enum status: { disable: 0, enable: 1 }
+  enum status: { on_shelf: 0, off_shelf: 1 }
 
   acts_as_paranoid
 

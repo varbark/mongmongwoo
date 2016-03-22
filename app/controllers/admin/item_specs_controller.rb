@@ -1,5 +1,6 @@
 class Admin::ItemSpecsController < AdminController
   before_action :find_item
+  before_action :find_spec, only: [:edit, :update, :destroy]
 
   def index
     @item_specs = @item.specs
@@ -25,6 +26,13 @@ class Admin::ItemSpecsController < AdminController
   end
 
   def update
+    if @item_spec.update!(spec_params)
+      flash[:notice] = "編輯完成"
+      redirect_to admin_item_item_specs_path(@item)
+    else
+      flash.now[:alert] = "請確認編輯內容是否正確"
+      render :edit
+    end
   end
 
   def destroy
@@ -33,7 +41,11 @@ class Admin::ItemSpecsController < AdminController
   private
 
   def find_item
-    @item = Item.find(params[:item_id])
+    @item = Item.on_shelf.includes(:specs).find(params[:item_id])
+  end
+
+  def find_spec
+    @item_spec = @item.specs.find(params[:id])
   end
 
   def spec_params

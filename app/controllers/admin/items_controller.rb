@@ -2,7 +2,7 @@ class Admin::ItemsController < AdminController
   before_action :find_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = Item.includes(:photos, :item_categories, :categories).recent
+    @items = Item.on_shelf.includes(:photos, :item_categories, :categories).recent
 
     respond_to do |format|
       format.html
