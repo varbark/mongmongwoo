@@ -66,5 +66,6 @@ class Admin::ItemsController < AdminController
   def find_item
     @item = Item.includes(:photos, :specs).find(params[:id])
     @photos = @item.photos
+    @specs = @item.specs
   end
 end

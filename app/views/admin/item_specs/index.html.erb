@@ -19,16 +19,23 @@
     <tbody>
       <% @item_specs.each do |spec| %>
         <tr>
-          <td>            
+          <td>
             <%= image_tag(spec.style_pic.url) if spec.style_pic.present? %>
           </td>
           <td><%= spec.style %></td>
           <td>
-            目前庫存數：<%= spec.style_amount %>
+            <div>
+              <p class="lead spec-style-stock">目前庫存數：<span><%= show_item_stock(spec.style_amount) %></span></p>
+            </div>
             <div class="update-stock-manullaly">
-              <%= form_for [:admin, @item, spec] do |f| %>
-                <%= f.number_field :style_amount, min: "0" %>
-                <%= f.submit "更新", class: "btn btn-warning btn-xs" %>
+              <%= form_for [:admin, @item, spec], html: { class: "form-inline" } do |f| %>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-archive"></i></div>
+                  <%= f.number_field :style_amount, min: "0", class: "form-control" %>
+                </div>                
+              </div>
+              <button type="submit" class="btn btn-warning">修改數量</button>                
               <% end %>
             </div>
           </td>
