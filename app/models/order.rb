@@ -50,6 +50,7 @@ class Order < ActiveRecord::Base
     items.each do |item|
       item_hash = {}
       item_hash[:name] = item.item_name
+      item_hash[:style] = item.item_style
       item_hash[:quantity] = item.item_quantity
       item_hash[:price] = item.item_price
       include_items << item_hash

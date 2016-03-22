@@ -54,7 +54,12 @@ Rails.application.routes.draw do
       resources :users, only: [:create, :show, :update]
 
       # 訂單API
-      resources :orders, only: [:create, :show, :index]
+      resources :orders, only: [:create, :show, :index] do
+        # 給 uid 回傳 orders[order1 , order2, ...]
+        collection do
+          get "/user_owned_orders/:uid" => "orders#user_owned_orders"
+        end
+      end
 
       # 超商API
       resources :counties, only: [:index, :show] do

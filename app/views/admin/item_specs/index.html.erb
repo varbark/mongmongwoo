@@ -23,7 +23,15 @@
             <%= image_tag(spec.style_pic.url) if spec.style_pic.present? %>
           </td>
           <td><%= spec.style %></td>
-          <td><%= spec.style_amount %></td>
+          <td>
+            目前庫存數：<%= spec.style_amount %>
+            <div class="update-stock-manullaly">
+              <%= form_for [:admin, @item, spec] do |f| %>
+                <%= f.number_field :style_amount, min: "0" %>
+                <%= f.submit "更新", class: "btn btn-warning btn-xs" %>
+              <% end %>
+            </div>
+          </td>
           <td>
             <%= button_tag "編輯", data: { toggle: "modal", target: "#spec-#{spec.id}-edit" }, type: "button", class: "btn btn-default btn-xs" %>
             <%= render partial: "edit_form", locals: { spec: spec } %>

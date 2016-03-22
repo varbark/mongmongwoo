@@ -53,7 +53,7 @@ class Admin::ItemSpecsController < AdminController
   private
 
   def find_item
-    @item = Item.on_shelf.includes(:specs).find(params[:item_id])
+    @item = Item.includes(:specs).find(params[:item_id])
   end
 
   def find_spec
