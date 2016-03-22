@@ -4,8 +4,12 @@ Rails.application.routes.draw do
   namespace :admin do
     root "items#index"
 
-    resources :items
-    # TODO photos uploading
+    resources :items do
+      # TODO photos uploading
+      resources :photos, except: [:show]
+
+      resources :item_specs, except: [:show]
+    end
     
     resources :categories, only: [:new, :create, :show, :index]
     resources :users, only: [:index, :show] do

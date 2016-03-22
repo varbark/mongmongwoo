@@ -2,7 +2,7 @@ class Admin::ItemsController < AdminController
   before_action :find_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = Item.includes(:photos, :item_categories, :categories).recent
+    @items = Item.on_shelf.includes(:photos, :item_categories, :categories).recent
 
     respond_to do |format|
       format.html
@@ -20,7 +20,7 @@ class Admin::ItemsController < AdminController
 
     if @item.save
       flash[:notice] = "新增商品成功"
-      redirect_to admin_categories_path
+      redirect_to admin_item_path(@item)
     else
       flash.now[:alert] = "請確認欄位資料"
       render :new
@@ -64,7 +64,7 @@ class Admin::ItemsController < AdminController
   end
 
   def find_item
-    @item = Item.includes(:photos).find(params[:id])
+    @item = Item.includes(:photos, :specs).find(params[:id])
     @photos = @item.photos
   end
 end

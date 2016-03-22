@@ -16,24 +16,23 @@
 class Item < ActiveRecord::Base
   scope :recent, -> { order(id: :DESC) }
 
-  enum status: { disable: 0, enable: 1 }
+  enum status: { on_shelf: 0, off_shelf: 1 }
 
   acts_as_paranoid
 
-  has_many :photos
+  has_many :photos, dependent: :destroy
   has_many :item_categories
   has_many :categories, through: :item_categories
+  has_many :specs, class_name: "ItemSpec", dependent: :destroy
 
-  accepts_nested_attributes_for :photos
-
-  after_commit :remove_nil_of_image
+  # after_commit :remove_nil_of_image
 
   def default_photo
-    photos.first.image.url
+    photos.first.image.url if self.photos.first
   end
 
   def intro_cover
-    photos.first.image.medium.url
+    photos.first.image.medium.url if self.photos.any?
   end
 
   def remove_nil_of_image
