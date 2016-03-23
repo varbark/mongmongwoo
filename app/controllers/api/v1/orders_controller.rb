@@ -20,6 +20,7 @@ class Api::V1::OrdersController < ApiController
         info.ship_phone = params[:ship_phone]
         info.ship_store_code = params[:ship_store_code]
         info.ship_store_id = params[:ship_store_id]
+        info.ship_store_name = params[:ship_store_name]
         info.save!
 
         # 商品明細 OrderItem
@@ -34,9 +35,9 @@ class Api::V1::OrdersController < ApiController
         end
       end
 
-      render json: "success"
+      render json: "Succes：新增一筆訂單"
     rescue Exception => e
-      render json: "error"
+      render json: "Error：訂單資料有誤"
     end
   end
 

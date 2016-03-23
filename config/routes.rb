@@ -48,7 +48,12 @@ Rails.application.routes.draw do
       resources :categories, only: [:index, :show]
 
       # 商品API
-      resources :items, only: [:index, :show]
+      resources :items, only: [:index, :show] do
+        member do
+          # 商品樣式資料
+          get "spec_info"
+        end
+      end
 
       # 用戶API
       resources :users, only: [:create, :show, :update]
@@ -71,27 +76,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  # namespace :store_api, defaults: { format: 'json' } do
-  #   # /county_id/town_id/store_id
-
-  #   # APP: request  county_id
-
-  #   # WEB: response towns.json
-
-  #   # APP: request town_id
-
-  #   # WEB: response stores.json
-
-  #   # get  /counties/towns.json
-
-  #   # get "/counties/:county_id/towns", to: "counties#towns_response"
-  #   resources :counties, only: [:index, :show] do
-  #     resources :towns, only: [:index, :show] do
-  #       resources :roads, only: [:index, :show] do
-  #         resources :stores, only: [:index, :show]
-  #       end
-  #     end
-  #   end
-  # end
 end
