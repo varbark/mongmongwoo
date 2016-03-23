@@ -43,6 +43,7 @@ class Order < ActiveRecord::Base
     include_info[:ship_phone] = info.ship_phone
     include_info[:ship_store_code] = info.ship_store_code
     include_info[:ship_store_id] = info.ship_store_id
+    include_info[:ship_store_name] = info.ship_store_name
     result_order[:info] = include_info
 
     # 商品明細

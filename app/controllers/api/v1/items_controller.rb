@@ -35,4 +35,21 @@ class Api::V1::ItemsController < ApiController
     
     render json: result_item
   end
+
+  def spec_info
+    item = Item.includes(:photos, :specs).find(params[:id])
+    specs = item.specs
+
+    result_spec_infos = []
+    specs.each do |spec|
+      spec_hash = {}
+      spec_hash[:id] = spec.id
+      spec_hash[:style] = spec.style
+      spec_hash[:style_amount] = spec.style_amount
+      spec_hash[:style_pic] = spec.style_pic.url
+      result_spec_infos << spec_hash
+    end
+
+    render json: result_spec_infos
+  end
 end
