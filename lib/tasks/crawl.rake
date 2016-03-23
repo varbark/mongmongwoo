@@ -480,20 +480,90 @@ namespace :crawl do
     # end
   end
 
-  # 經緯度
-  task :crawl_stores_lat_lng => :environment do
-
-    url_string = URI.escape('http://maps.googleapis.com/maps/api/geocode/json?address=台中市大里區益民路一段58號&sensor=true')
+  # 單一門市經緯度
+  task :crawl_stores_lat_lng_one_store, [:store_id] => :environment do |task, args|
+    # url_string = URI.escape('http://maps.googleapis.com/maps/api/geocode/json?address=台中市大里區益民路一段58號&sensor=true')
+    store = Store.find(args.store_id.to_i)
+    store_address = store.address.to_s
+    url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{store_address}&sensor=true"
+    url_string = URI.escape(url)
     url = URI.parse(url_string)
     req = Net::HTTP::Get.new(url.to_s)
-    res = Net::HTTP.start(url.host, url.port) {|http|
-      http.request(req)
-    }
+    res = Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
     content = res.body
-    lat = JSON.parse(content)['results'][0]['geometry']['location']['lat']
-    lng = JSON.parse(content)['results'][0]['geometry']['location']['lng']
+    lat = JSON.parse(content)['results'][0]['geometry']['location']['lat'].to_s
+    lng = JSON.parse(content)['results'][0]['geometry']['location']['lng'].to_s
+    store.lat = lat
+    store.lng = lng
+    store.save!
+    print lat + " " + lng
+  end
 
-    print lat.to_s + " " + lng.to_s
+  # 單一鄉鎮區門市經緯度
+  task :crawl_stores_lat_lng_one_town, [:town_id] => :environment do |task, args|
+    # url_string = URI.escape('http://maps.googleapis.com/maps/api/geocode/json?address=台中市大里區益民路一段58號&sensor=true')
+    town = Town.find(args.town_id.to_i)
+    stores = town.stores
+    begin
+      stores.each do |store|
+        if store.lng && store.lat
+          next
+        else
+          store_address = store.address.to_s
+          url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{store_address}&sensor=true"
+          url_string = URI.escape(url)
+          url = URI.parse(url_string)
+          req = Net::HTTP::Get.new(url.to_s)
+          res = Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
+          content = res.body
+          lat = JSON.parse(content)['results'][0]['geometry']['location']['lat'].to_s
+          lng = JSON.parse(content)['results'][0]['geometry']['location']['lng'].to_s
+          store.lat = lat
+          store.lng = lng
+          store.save!
+          print lat + " " + lng
+        end
+      end
+      puts "此鄉鎮區的門市已儲存完成"
+    rescue Exception => e
+      puts "\n"
+      puts "Something Wrong!"
+      puts "Please Checking Program!"
+    end
+  end
 
+  # 單一縣市門市經緯度
+  # FIXME
+  task :crawl_stores_lat_lng_one_county, [:county_id] => :environment do |task, args|
+    # url_string = URI.escape('http://maps.googleapis.com/maps/api/geocode/json?address=台中市大里區益民路一段58號&sensor=true')
+    county = County.find(args.county_id.to_i)
+    stores = county.stores
+    begin
+      stores.each do |store|
+        if store.lng && store.lat
+          next
+        else
+          store_address = store.address.to_s
+          # url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{store_address}&sensor=true"
+          url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{store_address}&sensor"
+          url_string = URI.escape(url)
+          url = URI.parse(url_string)
+          req = Net::HTTP::Get.new(url.to_s)
+          res = Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
+          content = res.body
+          lat = JSON.parse(content)['results'][0]['geometry']['location']['lat'].to_s
+          lng = JSON.parse(content)['results'][0]['geometry']['location']['lng'].to_s
+          store.lat = lat
+          store.lng = lng
+          store.save!
+          print lat + " " + lng
+        end
+      end
+      puts "此鄉鎮區的門市已儲存完成"
+    rescue Exception => e
+      puts "\n"
+      puts "Something Wrong!"
+      puts "Please Checking Program!"
+    end
   end
 end
