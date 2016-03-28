@@ -61,4 +61,8 @@ class Order < ActiveRecord::Base
     # 完整資料
     return result_order
   end
+
+  def created_at_for_api
+    self.created_at.strftime("%Y-%m-%d")
+  end
 end

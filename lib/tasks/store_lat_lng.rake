@@ -71,9 +71,9 @@ namespace :crawl do
     
     begin
       stores.each do |store|
-        if store.lng && store.lat
-          next
-        else
+        # if store.lng && store.lat
+        #   next
+        # else
           store_address = store.address.to_s
           # url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{store_address}&sensor=true"
           url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{store_address}&sensor"
@@ -87,9 +87,9 @@ namespace :crawl do
           store.lat = lat
           store.lng = lng
           store.save!
-          print lat + " " + lng
+          print lat + " " + lng + " "
           sleep(1)
-        end
+        # end
       end
 
       puts "此鄉鎮區的門市已儲存完成"
