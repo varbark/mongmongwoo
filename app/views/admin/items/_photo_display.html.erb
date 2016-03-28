@@ -13,9 +13,10 @@
     <% @photos.each do |photo| %>
       <% unless photo.image.blank? %>
         <div class="item <%= "active" if photo == @photos.first %>">
-          <%= image_tag(photo.image.medium.url) %>
+          <!-- <%= image_tag(photo.image.medium.url) %> -->
+          <%= item_photo(photo) %>
           <div class="carousel-caption">
-            <%= photo.photo_intro %>
+            <%= raw(photo.photo_intro) %>
           </div>
         </div>
       <% end %>

@@ -4,7 +4,15 @@
       <%= link_to "返回上頁", admin_item_path(@item), class: "btn btn-default btn-sm" %>
       <%= link_to "新增圖片", new_admin_item_photo_path, class: "btn btn-primary btn-sm" %>
     </div>
-    <hr>
+    <div class="breadcrumb-topbar">
+      <ol class="breadcrumb">
+        <li><a href="#">萌萌屋</a></li>
+        <li><a href="<%= admin_item_path(@item) %>"><%= @item.name %></a></li>
+        <li class="<%= "active" if current_page?(controller: "admin/photos") %>">
+          圖片列表
+        </li>
+      </ol>
+    </div>
     <thead>
       <tr>
         <th>圖片</th>
@@ -16,7 +24,7 @@
       <% @photos.each do |photo| %>
         <tr>
           <td>
-            <%= image_tag(photo.image.thumb.url) if photo.present? %>
+            <%= item_photo(photo, "thumb") %>
           </td>
           <td><%= raw photo.photo_intro %></td>
           <td>            

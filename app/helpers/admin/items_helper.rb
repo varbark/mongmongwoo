@@ -3,16 +3,16 @@ module Admin::ItemsHelper
     action_name == "new" ? "新增商品" : "編輯商品"
   end
 
-  def item_photo(photo, size = nil)
+  def item_photo(photo, size = "medium")
     if photo.present?
       image_url = photo.image.send(size).url
     else
       case size
-      when :large
-        volume = "600x600"
+      # when :large
+      #   volume = "600x600"
       when :medium
         volume = "400x400"
-      else
+      when :thumb
         volume = "150x150"
       end
 
