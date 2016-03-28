@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160328030632) do
+ActiveRecord::Schema.define(version: 20160328085612) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 20160328030632) do
     t.string   "uid",            limit: 255
     t.integer  "ship_fee",       limit: 4
     t.integer  "items_price",    limit: 4
+    t.date     "created_on"
   end
 
   add_index "orders", ["deleted_at"], name: "index_orders_on_deleted_at", using: :btree
