@@ -1,5 +1,10 @@
 <div clas="row">
   <div class="content-box-large">
+    <ol class="breadcrumb">
+      <li><a href="#">萌萌屋</a></li>
+      <li class="<%= "active" if current_page?(controller: "admin/categories", action: "index") %>"><a href="<%= admin_categories_path %>">分類列表</a></li>
+      <li class="<%= "active" if current_page?(controller: "admin/items", action: "show") %>"><%= @item.name %></li>
+    </ol>
     <div class="pull-right">
       <%= link_to "編輯商品", edit_admin_item_path(@item), class: "btn btn-default btn-sm" %>
       <%= link_to "商品圖片", admin_item_photos_path(@item), class: "btn btn-primary btn-sm" %>

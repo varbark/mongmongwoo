@@ -56,7 +56,7 @@ class Admin::PhotosController < AdminController
   private
 
   def find_item
-    @item = Item.on_shelf.includes(:photos).find(params[:item_id])
+    @item = Item.includes(:photos).find(params[:item_id])
   end
 
   def find_photo
