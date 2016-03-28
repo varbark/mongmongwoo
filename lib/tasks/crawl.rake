@@ -557,6 +557,7 @@ namespace :crawl do
           store.lng = lng
           store.save!
           print lat + " " + lng
+          sleep(1)
         end
       end
       puts "此鄉鎮區的門市已儲存完成"
