@@ -25,10 +25,9 @@ class Item < ActiveRecord::Base
   has_many :categories, through: :item_categories
   has_many :specs, class_name: "ItemSpec", dependent: :destroy
 
-  # after_commit :remove_nil_of_image
-
+  # 商品頁預設圖片
   def default_photo
-    photos.first.image.url if self.photos.first
+    photos.first
   end
 
   def intro_cover

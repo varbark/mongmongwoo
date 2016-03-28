@@ -12,7 +12,8 @@
     </div>
     <div class="item-cover-words-intro">
       <div class="cover-intro col-md-4">
-        <%= image_tag(@item.intro_cover) %>
+        <!-- <%= image_tag(@item.intro_cover) %> -->
+        <%= item_photo(@item.default_photo) %>
       </div>
       <div class="words-intro col-md-5">
         <dl class="dl-horizontal">
@@ -36,15 +37,7 @@
     <div class="well">
       <p class="lead">樣式圖片</p>
       <dl class="dl-horizontal">
-        <% @specs.each do |spec| %>
-          <dt>樣式圖片</dt>
-          <dd><%= spec_photo(spec) %></dd>
-          <dt>樣式名稱</dt>
-          <dd><%= spec.style %></dd>  
-          <dt>樣式庫存</dt>
-          <dd><%= spec.style_amount %></dd>
-          <hr>          
-        <% end %>        
+        <%= render partial: "spec_display", locals: { specs: @specs } %>    
       </dl>      
     </div>
   </div>

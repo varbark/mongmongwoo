@@ -25,7 +25,7 @@
       <% @item_specs.each do |spec| %>
         <tr>
           <td>
-            <%= image_tag(spec.style_pic.url) if spec.style_pic.present? %>
+            <%= spec_photo(spec) %>
           </td>
           <td><%= raw(spec.style) %></td>
           <td>

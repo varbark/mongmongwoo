@@ -24,7 +24,7 @@
       <% @photos.each do |photo| %>
         <tr>
           <td>
-            <%= image_tag(photo.image.thumb.url) if photo.present? %>
+            <%= item_photo(photo, "thumb") %>
           </td>
           <td><%= raw photo.photo_intro %></td>
           <td>            
