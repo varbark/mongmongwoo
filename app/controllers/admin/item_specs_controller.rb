@@ -38,12 +38,20 @@ class Admin::ItemSpecsController < AdminController
   end
 
   def update
-    if @item_spec.update!(update_spec_params)
-      flash[:notice] = "編輯完成"
-      redirect_to admin_item_item_specs_path(@item)
-    else
-      flash.now[:alert] = "請確認編輯內容是否正確"
-      render :edit
+    @item_spec.update!(update_spec_params)
+
+    respond_to do |format|
+      format.html do
+        if @item_spec.valid?
+          flash[:notice] = "編輯完成"
+          redirect_to admin_item_item_specs_path(@item)
+        else
+          flash.now[:alert] = "請確認編輯內容是否正確"
+          render :edit
+        end
+      end
+
+      format.js
     end
   end
 

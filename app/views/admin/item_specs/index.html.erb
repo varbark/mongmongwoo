@@ -30,15 +30,15 @@
           <td><%= raw(spec.style) %></td>
           <td>
             <div>
-              <p class="lead spec-style-stock">目前庫存數：<span><%= show_item_stock(spec.style_amount) %></span></p>
+              <p class="lead spec-style-stock">目前庫存數：<span id="style-<%= spec.id %>-stock"><%= show_item_stock(spec.style_amount) %></span></p>
             </div>
             <div class="update-stock-manullaly">
-              <%= form_for [:admin, @item, spec], html: { class: "form-inline" } do |f| %>
+              <%= form_for [:admin, @item, spec], remote: true, html: { class: "form-inline" } do |f| %>
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-addon"><i class="fa fa-archive"></i></div>
                   <%= f.number_field :style_amount, min: "0", class: "form-control" %>
-                </div>                
+                </div>
               </div>
               <button type="submit" class="btn btn-warning">修改數量</button>                
               <% end %>
