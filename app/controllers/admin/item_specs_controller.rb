@@ -56,6 +56,9 @@ class Admin::ItemSpecsController < AdminController
   end
 
   def destroy
+    @item_spec.destroy!
+    flash[:warning] = "樣式圖片已刪除"
+    redirect_to admin_item_item_specs_path(@item)
   end
 
   private
