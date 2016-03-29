@@ -12,19 +12,9 @@ Rails.application.routes.draw do
     end
     
     resources :categories, only: [:new, :create, :show, :index]
-    resources :users, only: [:index, :show] do
-      collection do
+    
+    resources :users, only: [:index, :show]
 
-        # TODO
-        # 外界POST request
-        # post "import_user", to: "users#import_user"
-      end
-
-      # member do
-      #   get "/:uid", to: "users#check_user"
-      # end
-    end
-    # get "users/show_uid/:uid", to: "users#show_uid", as: "uid_user"
     resources :counties, only: [:index, :show] do
       resources :towns, only: [:index, :show] do
         resources :roads, only: [:index, :show] do
@@ -32,11 +22,12 @@ Rails.application.routes.draw do
         end
       end
     end
+
     resources :orders, only: [:index, :show] do
       member do
-        post "item_shipping"
-        post "item_shipped"
-        post "order_cancelled"
+        patch "item_shipping"
+        patch "item_shipped"
+        patch "order_cancelled"
       end
     end
   end
