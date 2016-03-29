@@ -27,22 +27,24 @@ gem 'rspec-rails'
 gem 'capybara'
 gem 'selenium-webdriver'
 
-# Deploy
-# gem 'capistrano', '~> 3.1.0'
-# gem 'capistrano-bundler', '~> 1.1.2'
-# gem 'capistrano-rails', '~> 1.1.1'
-# # Add this if you're using rbenv
-# gem 'capistrano-rbenv', github: "capistrano/rbenv"
-
-# Add this if you're using rvm
-# gem 'capistrano-rvm', github: "capistrano/rvm"
-
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'meta_request'
   gem 'faker'
   gem 'pry-rails'
+
+  # 檢查安全性
+  gem 'brakeman', :require => false
+
+  # 檢查 N+1 Query
+  gem 'bullet'
+
+  # 靜態分析程式碼(已整合多套工具)
+  gem 'rubycritic', :require => false
+
+  # 監測網站效能
+  gem 'newrelic_rpm'
 
   #Capistrano setup
   gem 'capistrano', '~> 3.4'
