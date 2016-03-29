@@ -14,8 +14,6 @@ class Api::V1::CategoriesController < ApiController
 
     # 先將商品與相關圖片讀取好
     category = Category.includes(items: [:photos]).find(params[:id])
-
-    category_name = category.name
     result_category = {}
     include_items = []
 
@@ -26,10 +24,10 @@ class Api::V1::CategoriesController < ApiController
       item_hash[:id] = item.id
       item_hash[:name] = item.name
       item_hash[:price] = item.price
-      item_hash[:cover] = item.default_photo
+      item_hash[:cover] = item.photos.first.image.url
       include_items << item_hash
     end
-    result_category[category_name] = include_items
-    render json: result_category
+    result_category = include_items
+    render json: result_category#, except: [:thumb, :medium, :cover]
   end
 end
