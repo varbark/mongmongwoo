@@ -23,35 +23,53 @@ class Admin::OrdersController < AdminController
 
   def item_shipping
     begin
-      @order.update_attributes!(status: 1)
-      flash[:notice] = "已將編號：#{@order.id} 訂單狀態設為已出貨"
+      @order.update_attributes!(status: 1)      
     rescue ActiveRecord::ActiveRecordError
       flash[:alert] = "請仔細確認訂單的實際處理進度"
     end
 
-    redirect_to :back
+    respond_to do |format|
+      format.html do
+        flash[:notice] = "已將編號：#{@order.id} 訂單狀態設為已出貨"
+        redirect_to :back
+      end
+
+      format.js
+    end
   end
 
   def item_shipped
     begin
-      @order.update_attributes!(status: 2)
-      flash[:notice] = "已將編號：#{@order.id} 訂單狀態設為完成取貨"
+      @order.update_attributes!(status: 2)      
     rescue ActiveRecord::ActiveRecordError
       flash[:alert] = "請仔細確認訂單的實際處理進度"
     end
 
-    redirect_to :back
+    respond_to do |format|
+      format.html do
+        flash[:notice] = "已將編號：#{@order.id} 訂單狀態設為完成取貨"
+        redirect_to :back
+      end
+
+      format.js
+    end
   end
 
   def order_cancelled
     begin
-      @order.update_attributes!(status: 3)
-      flash[:alert] = "已將編號：#{@order.id} 訂單狀態設為訂單取消"
+      @order.update_attributes!(status: 3)      
     rescue ActiveRecord::ActiveRecordError
       flash[:alert] = "請仔細確認訂單的實際處理進度"
     end
 
-    redirect_to :back
+    respond_to do |format|
+      format.html do
+        flash[:alert] = "已將編號：#{@order.id} 訂單狀態設為訂單取消"
+        redirect_to :back
+      end
+
+      format.js
+    end
   end
 
   private
