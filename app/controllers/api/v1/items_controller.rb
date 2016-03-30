@@ -16,7 +16,7 @@ class Api::V1::ItemsController < ApiController
     include_photos = []    
     item.photos.each do |photo|
       pic = {}
-      pic[:image_url] = photo.image.medium.url
+      pic[:image_url] = photo.image.url
       pic[:photo_intro] = photo.photo_intro
       include_photos << pic
     end
