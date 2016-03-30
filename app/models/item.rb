@@ -25,6 +25,8 @@ class Item < ActiveRecord::Base
   has_many :categories, through: :item_categories
   has_many :specs, class_name: "ItemSpec", dependent: :destroy
 
+  self.per_page = 10
+
   # 商品頁預設圖片
   def default_photo
     photos.first
