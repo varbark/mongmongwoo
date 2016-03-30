@@ -2,7 +2,7 @@ class Admin::OrdersController < AdminController
   before_action :find_order, only: [:show, :item_shipping, :item_shipped, :order_cancelled]
 
   def index
-    @orders = Order.includes(:user, :info, :items).recent
+    @order_page = @orders = Order.includes(:user, :info, :items).recent.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html
@@ -10,8 +10,7 @@ class Admin::OrdersController < AdminController
     end
   end
 
-  def show
-    
+  def show    
     @info = @order.info
     @items = @order.items
 
