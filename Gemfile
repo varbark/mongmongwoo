@@ -19,6 +19,7 @@ gem "paranoia", "~> 2.0" # 軟刪除
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 gem 'ckeditor'
+gem 'will_paginate', '~> 3.0.5'
 
 # For carawl cvs data setup
 gem 'nokogiri'

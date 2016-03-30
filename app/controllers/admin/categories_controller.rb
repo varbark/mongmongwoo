@@ -3,12 +3,7 @@ class Admin::CategoriesController < AdminController
   before_action :find_category, only: [:show]
 
   def index
-    @categories = Category.includes(:items, :item_categories).recent
-
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render :json => @categories }
-    # end
+    @categories = Category.recent
   end
 
   def new
@@ -28,25 +23,7 @@ class Admin::CategoriesController < AdminController
   end
 
   def show
-
-    # TODO 
-    # 移去用戶API
-    # result_arr = []    
-    # items = @category.items
-    # items.each do |item|
-    #   item_hash = {}
-    #   item_hash[:id] = item.id
-    #   item_hash[:name] = item.name
-    #   item_hash[:price] = item.price
-    #   item_hash[:photo] = item.photos.first.image.url
-    #   result_arr << item_hash                    
-    # end
-
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render :json => result_arr }
-    # end
-
+    @category_page = @category_items = @category.items.paginate(:page => params[:page])
   end
 
   private
@@ -56,6 +33,6 @@ class Admin::CategoriesController < AdminController
   end
 
   def find_category
-    @category = Category.find(params[:id])
+    @category = Category.includes(items: [:photos, :specs]).find(params[:id])
   end
 end

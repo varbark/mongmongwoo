@@ -2,7 +2,7 @@ class Admin::ItemsController < AdminController
   before_action :find_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = Item.includes(:photos, :item_categories, :categories).recent
+    @item_page = @items = Item.recent.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html
@@ -28,17 +28,9 @@ class Admin::ItemsController < AdminController
   end
 
   def show
-    # item_arr = Array.new
-    # item_arr << @item
-    # item_arr << @photos
-
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render :json =>  item_arr, except: [ :slug, :status, :deleted_at, :created_at, :updated_at ] }
-    # end
   end
 
-  def edit    
+  def edit
   end
 
   def update

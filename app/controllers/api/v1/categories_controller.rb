@@ -2,9 +2,8 @@ class Api::V1::CategoriesController < ApiController
   # TODO 整理至model
   def index
     # TODO 分批撈資料
-    categories = Category.includes(:item_categories, items: [:photos]).all
-
-    # categories = Category.includes(:item_categories, :items).all
+    categories = Category.all
+    # categories = Category.includes(:item_categories, items: [:photos]).all
     
     render json: categories, only: [:id, :name]
   end
@@ -13,7 +12,7 @@ class Api::V1::CategoriesController < ApiController
     # category = Category.includes(:item_categories, :items).find(params[:id])
 
     # 先將商品與相關圖片讀取好
-    category = Category.includes(items: [:photos]).find(params[:id])
+    category = Category.includes(items: [:photos, :specs]).find(params[:id])
     result_category = {}
     include_items = []
 

@@ -10,7 +10,13 @@
     <h2><%= @category.name %></h2>
     <div class="category-all-items">
       <div class="panel-body">
+        <div class="apple_pagination">
+          <%= will_paginate @category_page, :container => false %>
+        </div><br>
         <%= render "table" %>
+        <div class="apple_pagination">
+          <%= will_paginate @category_page, :container => false %>
+        </div>
       </div>
     </div>
   </div>
