@@ -6,6 +6,6 @@ class Api::V1::StoresController < ApiController
   def index
     @stores = @road.stores
 
-    render json: @stores, only: [:id, :store_code, :name, :address, :phone]
+    render json: @stores, only: [:id, :store_code, :name, :address, :phone, :lat, :lng]
   end
 end
