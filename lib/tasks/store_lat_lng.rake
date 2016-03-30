@@ -1,6 +1,4 @@
 require 'net/http'
-require 'capybara'
-require 'capybara/dsl'
 
 namespace :crawl do
   # 單一門市經緯度
@@ -106,7 +104,7 @@ namespace :crawl do
           store.lng = lng
           store.save!
           print lat + " " + lng + " "
-          sleep(1)
+          # sleep(1)
         end
       end
 
