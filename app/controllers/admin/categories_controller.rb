@@ -3,7 +3,7 @@ class Admin::CategoriesController < AdminController
   before_action :find_category, only: [:show]
 
   def index
-    @categories = Category.includes(:items, :item_categories).recent
+    @categories = Category.recent
   end
 
   def new
@@ -33,6 +33,6 @@ class Admin::CategoriesController < AdminController
   end
 
   def find_category
-    @category = Category.includes(:items, :item_categories).find(params[:id])
+    @category = Category.includes(items: [:photos, :specs]).find(params[:id])
   end
 end
