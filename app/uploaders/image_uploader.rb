@@ -23,13 +23,8 @@ class ImageUploader < CarrierWave::Uploader::Base
     process resize_to_fill: [150,100]
   end
 
-  # 商品介紹圖片尺寸
-  version :medium do
-    process resize_to_fill: [600,400]
-  end
-
   # Cover
   version :cover do
-    process resize_to_fill: [400,400]
+    process resize_to_fill: [450,300]
   end
 end

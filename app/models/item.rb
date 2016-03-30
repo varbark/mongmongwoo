@@ -2,15 +2,15 @@
 #
 # Table name: items
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)      not null
-#  price      :integer          not null
-#  image      :string(255)
-#  slug       :string(255)
-#  status     :integer          default(0)
-#  deleted_at :datetime
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  name        :string(255)      not null
+#  price       :integer          not null
+#  slug        :string(255)
+#  status      :integer          default(0)
+#  deleted_at  :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  description :text(65535)
 #
 
 class Item < ActiveRecord::Base
@@ -31,7 +31,7 @@ class Item < ActiveRecord::Base
   end
 
   def intro_cover
-    photos.first.image.medium.url if self.photos.any?
+    photos.first.image.url if self.photos.any?
   end
 
   def remove_nil_of_image

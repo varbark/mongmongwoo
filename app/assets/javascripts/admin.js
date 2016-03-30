@@ -6,3 +6,4 @@
 //= require jquery.dataTables.min
 //= require dataTables.bootstrap
 //= require ckeditor/init
+//= require pnotify.custom.min

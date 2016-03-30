@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: item_specs
+#
+#  id           :integer          not null, primary key
+#  item_id      :integer
+#  style        :string(255)
+#  style_amount :integer
+#  style_pic    :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class ItemSpec < ActiveRecord::Base
   scope :recent, -> {order(id: :DESC)}
 
