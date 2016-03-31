@@ -42,7 +42,7 @@ class Api::V1::OrdersController < ApiController
   end
 
   def index
-    orders = Order.includes(:user, :info, :items).all
+    orders = Order.includes(:user, :info, :items).all.page(params[:page]).per_page(20)
     render json: orders, only: [:id, :user_id, :total, :status, :uid]
   end
 
@@ -55,8 +55,8 @@ class Api::V1::OrdersController < ApiController
   end
 
   def user_owned_orders
-    user_orders = Order.includes(:user).where("uid = ?", params[:uid])
-    result_user_orders = []
+    user_orders = Order.includes(:user).where("uid = ?", params[:uid]).page(params[:page]).per_page(20)
+    # result_user_orders = []
 
     render json: user_orders, only: [:id, :uid, :total, :created_on, :status, :user_id]
   end
