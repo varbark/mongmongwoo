@@ -52,7 +52,7 @@ class Admin::ItemsController < AdminController
   private
 
   def item_params
-    params.require(:item).permit(:name, :price, :image, :slug, :description, category_ids: [], :photos_attributes => ["image", "photo_intro"])
+    params.require(:item).permit(:name, :price, :cover, :slug, :description, category_ids: [])
   end
 
   def find_item
