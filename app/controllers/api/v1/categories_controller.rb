@@ -12,21 +12,22 @@ class Api::V1::CategoriesController < ApiController
     # category = Category.includes(:item_categories, :items).find(params[:id])
 
     # 先將商品與相關圖片讀取好
-    category = Category.includes(items: [:photos, :specs]).find(params[:id])
+    category = Category.includes(:items).find(params[:id])
     result_category = {}
     include_items = []
 
     # 減少query數
-    items = category.items.where("status = ?", "0")
-    items.each do |item|
-      item_hash = {}
-      item_hash[:id] = item.id
-      item_hash[:name] = item.name
-      item_hash[:price] = item.price
-      item_hash[:cover] = item.photos.first.image.url
-      include_items << item_hash
-    end
-    result_category = include_items
-    render json: result_category#, except: [:thumb, :medium, :cover]
+    items = category.items.select(:id, :name, :price, :cover).where("status = ?", "0").uniq.page(params[:page]).per_page(20)
+    # items.each do |item|
+    #   item_hash = {}
+    #   item_hash[:id] = item.id
+    #   item_hash[:name] = item.name
+    #   item_hash[:price] = item.price
+    #   item_hash[:cover] = item.photos.first.image.url
+    #   include_items << item_hash
+    # end
+    # result_category = include_items
+    # render json: result_category
+    render json: items
   end
 end

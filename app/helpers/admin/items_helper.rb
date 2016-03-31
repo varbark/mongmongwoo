@@ -3,6 +3,26 @@ module Admin::ItemsHelper
     action_name == "new" ? "新增商品" : "編輯商品"
   end
 
+  def item_icon(photo)
+    if photo.present?
+      image_url = photo.icon.url
+    else
+      image_url = "http://placehold.it/150x100&text=No Pic"      
+    end
+    
+    image_tag(image_url, class: "thumbnail")
+  end
+
+  def item_cover(photo)
+    if photo.present?
+      image_url = photo.url
+    else
+      image_url = "http://placehold.it/450x300&text=No Pic"      
+    end
+    
+    image_tag(image_url, class: "thumbnail")
+  end
+
   def item_photo(photo, size=nil)
     if photo.present?
       if size.present?
