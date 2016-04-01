@@ -5,6 +5,10 @@
 @import "styles";
 @import "pnotify.custom.min";
 @import "pagination";
+@import "jquery-ui/core";
+@import "jquery-ui/sortable";
+@import "jquery-ui/draggable";
+@import "jquery-ui/resizable";
 
 /* === Custom CSS === */
 /*商品顯示頁*/
@@ -23,4 +27,11 @@ div.item-cover-words-intro {
 
 .spec-style-stock span {
   color: rgb(255, 34, 228);
+}
+
+/*商品排序拖曳按鈕*/
+#items-sort-list .handle {
+  font-size: 12px;
+  color: #777;
+  cursor: move;
 }

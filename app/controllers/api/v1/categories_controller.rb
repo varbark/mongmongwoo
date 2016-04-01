@@ -16,8 +16,8 @@ class Api::V1::CategoriesController < ApiController
     result_category = {}
     include_items = []
 
-    # 減少query數
     items = category.items.select(:id, :name, :price, :cover).where("status = ?", "0").uniq.page(params[:page]).per_page(20)
+    # items = category.items.select(:id, :name, :price, :cover).where("status = ?", "0").uniq.page(params[:page]).per_page(20)
     # items.each do |item|
     #   item_hash = {}
     #   item_hash[:id] = item.id

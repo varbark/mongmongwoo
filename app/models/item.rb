@@ -16,6 +16,8 @@
 class Item < ActiveRecord::Base
   scope :recent, -> { order(id: :DESC) }
 
+  scope :priority, -> { order(position: :ASC) }
+
   enum status: { on_shelf: 0, off_shelf: 1 }
 
   acts_as_paranoid

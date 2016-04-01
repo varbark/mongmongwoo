@@ -1,5 +1,11 @@
 // common script for all pages
 //= require jquery
+//= require jquery-ui/core
+//= require jquery-ui/draggable
+//= require jquery-ui/resizable
+//= require jquery-ui/position
+//= require jquery-ui/sortable
+//= require jquery-ui/mouse
 //= require jquery_ujs
 //= require bootstrap
 //= require custom
@@ -7,3 +13,4 @@
 //= require dataTables.bootstrap
 //= require ckeditor/init
 //= require pnotify.custom.min
+//= require_tree ./admin
