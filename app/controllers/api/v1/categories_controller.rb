@@ -13,11 +13,12 @@ class Api::V1::CategoriesController < ApiController
 
     # 先將商品與相關圖片讀取好
     category = Category.includes(:items).find(params[:id])
-    result_category = {}
-    include_items = []
+    # TODO 商品封面圖只傳預設尺寸
+    items = category.items.priority.select(:id, :name, :price, :cover, :position).where("status = ?", "0").uniq.page(params[:page]).per_page(20)
 
-    # 減少query數
-    items = category.items.select(:id, :name, :price, :cover).where("status = ?", "0").uniq.page(params[:page]).per_page(20)
+    # result_category = {}
+    # include_items = []
+    # items = category.items.select(:id, :name, :price, :cover).where("status = ?", "0").uniq.page(params[:page]).per_page(20)
     # items.each do |item|
     #   item_hash = {}
     #   item_hash[:id] = item.id

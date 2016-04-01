@@ -2,7 +2,7 @@ class Admin::ItemsController < AdminController
   before_action :find_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @item_page = @items = Item.recent.paginate(:page => params[:page])
+    @item_page = @items = Item.priority.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html
@@ -48,6 +48,15 @@ class Admin::ItemsController < AdminController
     flash[:warning] = "商品已刪除"
     redirect_to admin_root_path
   end
+
+  # def sort_items_priority
+  #   binding.pry
+  #   params.each_with_index do |id, index|
+  #     Item.update_all({position: index + 1})
+  #   end
+
+  #   render nothing: true
+  # end
 
   private
 

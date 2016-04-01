@@ -9,9 +9,21 @@ Rails.application.routes.draw do
       resources :photos, except: [:show]
 
       resources :item_specs, except: [:show]
+
+      # 商品重新排序
+      # collection do
+      #   post "sort_items_priority"
+      # end
     end
+
+    # post "sort_items_priority", to: "items#sort_items_priority"
     
-    resources :categories, only: [:new, :create, :show, :index]
+    resources :categories, only: [:new, :create, :show, :index] do
+      # 商品重新排序
+      collection do
+        post "sort_items_priority"
+      end
+    end
     
     resources :users, only: [:index, :show]
 

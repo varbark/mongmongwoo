@@ -23,7 +23,15 @@ class Admin::CategoriesController < AdminController
   end
 
   def show
-    @category_page = @category_items = @category.items.paginate(:page => params[:page])
+    @category_page = @category_items = @category.items.priority.paginate(:page => params[:page])
+  end
+
+  def sort_items_priority
+    params[:item].each_with_index do |id, index|
+      Item.where(id: id).update_all({position: index + 1})
+    end
+
+    render nothing: true
   end
 
   private
@@ -33,6 +41,6 @@ class Admin::CategoriesController < AdminController
   end
 
   def find_category
-    @category = Category.includes(items: [:photos, :specs]).find(params[:id])
+    @category = Category.includes(:items).find(params[:id])
   end
 end
