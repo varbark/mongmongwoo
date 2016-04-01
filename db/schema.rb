@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20160331062924) do
     t.datetime "updated_at",                            null: false
     t.text     "description", limit: 65535
     t.string   "cover",       limit: 255
-    t.integer  "position",    limit: 4
+    t.integer  "position",    limit: 4,     default: 1
   end
 
   add_index "items", ["deleted_at"], name: "index_items_on_deleted_at", using: :btree

@@ -1,17 +1,18 @@
 class Api::V1::ItemsController < ApiController
   def index
-    items = Item.includes(:photos, :specs, :item_categories, :categories).all
-    render json: items, only: [:id, :name, :price]
+    items = Item.includes(:photos, :specs, :item_categories, :categories).priority
+    render json: items, only: [:id, :name, :price, :position]
   end
 
   def show
-    item = Item.includes(:photos, :specs, :item_categories, :categories).find(params[:id])
+    item = Item.includes(:photos, :specs).find(params[:id])
     specs = item.specs
 
     result_item = {}
     result_item[:id] = item.id
     result_item[:name] = item.name
     result_item[:price] = item.price
+    result_item[:cover] = item.cover.url
     result_item[:description] = item.description
     include_photos = []    
     item.photos.each do |photo|

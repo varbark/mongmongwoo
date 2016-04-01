@@ -27,7 +27,6 @@ class Admin::CategoriesController < AdminController
   end
 
   def sort_items_priority
-    # binding.pry
     params[:item].each_with_index do |id, index|
       Item.where(id: id).update_all({position: index + 1})
     end
