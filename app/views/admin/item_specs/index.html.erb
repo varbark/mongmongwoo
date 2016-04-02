@@ -34,7 +34,7 @@
             </div>
             <div class="update-stock-manullaly">
               <%= form_for [:admin, @item, spec], remote: true, html: { class: "form-inline" } do |f| %>
-              <div class="form-group">
+              <div class="form-group col-md-4">
                 <div class="input-group">
                   <div class="input-group-addon"><i class="fa fa-archive"></i></div>
                   <%= f.number_field :style_amount, min: "0", class: "form-control" %>
