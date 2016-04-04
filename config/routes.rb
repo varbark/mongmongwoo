@@ -25,7 +25,14 @@ Rails.application.routes.draw do
       end
     end
     
-    resources :users, only: [:index, :show]
+    resources :users, only: [:index, :show, :create, :update] do
+      collection do
+        # 外界POST request
+        post "import_user", to: "users#import_user"
+      end
+    end
+
+    get "users/show_uid/:uid", to: "users#show_uid", as: "uid_user"
 
     resources :counties, only: [:index, :show] do
       resources :towns, only: [:index, :show] do
