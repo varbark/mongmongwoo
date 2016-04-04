@@ -22,7 +22,7 @@ class Admin::UsersController < AdminController
     end
   end
 
-  def create
+  def import_user
     begin
       user = User.new
       user.user_name = params[:user_name]
