@@ -9,10 +9,16 @@
 #  style_pic    :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  deleted_at   :datetime
+#  status       :integer          default(0)
 #
 
 class ItemSpec < ActiveRecord::Base
   scope :recent, -> {order(id: :DESC)}
+
+  enum status: { on_shelf: 0, off_shelf: 1 }
+
+  acts_as_paranoid
 
   belongs_to :item
 

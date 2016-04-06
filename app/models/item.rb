@@ -11,6 +11,9 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  description :text(65535)
+#  cover       :string(255)
+#  position    :integer          default(1)
+#  url         :string(255)
 #
 
 class Item < ActiveRecord::Base

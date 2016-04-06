@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331062924) do
+ActiveRecord::Schema.define(version: 20160406014143) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -66,8 +66,11 @@ ActiveRecord::Schema.define(version: 20160331062924) do
     t.string   "style_pic",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
+    t.integer  "status",       limit: 4,   default: 0
   end
 
+  add_index "item_specs", ["deleted_at"], name: "index_item_specs_on_deleted_at", using: :btree
   add_index "item_specs", ["item_id"], name: "index_item_specs_on_item_id", using: :btree
 
   create_table "items", force: :cascade do |t|
@@ -81,6 +84,7 @@ ActiveRecord::Schema.define(version: 20160331062924) do
     t.text     "description", limit: 65535
     t.string   "cover",       limit: 255
     t.integer  "position",    limit: 4,     default: 1
+    t.string   "url",         limit: 255
   end
 
   add_index "items", ["deleted_at"], name: "index_items_on_deleted_at", using: :btree
