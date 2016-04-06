@@ -8,7 +8,11 @@ Rails.application.routes.draw do
       # TODO photos uploading
       resources :photos, except: [:show]
 
-      resources :item_specs, except: [:show]
+      resources :item_specs, except: [:show] do
+        collection do
+          post "item_specs", to: "item_specs#create"
+        end
+      end
 
       # 商品重新排序
       # collection do
