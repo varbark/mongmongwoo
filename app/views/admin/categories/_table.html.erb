@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>商品排序</th>
+      <th>商品狀態</th>
       <th>商品圖片</th>
       <th>商品名稱</th>
       <th>商品價格</th>
@@ -17,6 +18,11 @@
           </button>
           <!-- <span id="item-<%= item.id %>-position"><%= item.position %></span> -->
           <span class="handle btn btn-default btn-xs"><i class="fa fa-arrows"></i>按住我</span>
+        </td>
+        <td id="status-<%= item.id %>">
+          <%= link_to ( item.on_shelf? ? off_shelf_admin_item_path(item) : on_shelf_admin_item_path(item) ), method: :patch, remote: true do %>
+            <%= item_status(item.status) %>
+          <% end %>
         </td>
         <td>
           <%= link_to admin_item_path(item) do %>
