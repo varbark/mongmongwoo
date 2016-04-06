@@ -1,17 +1,22 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
-  
+  # 後台
   namespace :admin do
     root "items#index"
 
     resources :items do
+      member do
+        patch "on_shelf"
+        patch "off_shelf"
+      end
+
       # TODO photos uploading
       resources :photos, except: [:show]
 
       resources :item_specs, except: [:show] do
-        collection do
-          post "item_specs", to: "item_specs#create"
-        end
+        # collection do
+        #   post "item_specs", to: "item_specs#create"
+        # end
       end
 
       # 商品重新排序
@@ -55,6 +60,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # API for App
   namespace :api do
     namespace :v1 do
       # TODO 重構整理
