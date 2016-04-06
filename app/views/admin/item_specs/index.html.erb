@@ -16,6 +16,7 @@
     <thead>
       <tr>
         <th>樣式圖片</th>
+        <th>樣式狀態</th>
         <th>樣式名稱</th>
         <th>樣式數量</th>
         <th>操作選項</th>
@@ -26,6 +27,11 @@
         <tr id="spec-<%= spec.id %>">
           <td>
             <%= spec_photo(spec) %>
+          </td>
+          <td id="status-<%= spec.id %>">
+            <%= link_to (spec.on_shelf? ? off_shelf_admin_item_item_spec_path(@item, spec) : on_shelf_admin_item_item_spec_path(@item, spec)), method: :patch, remote: true do %>
+              <%= spec_status(spec.status) %>
+            <% end %>            
           </td>
           <td><%= raw(spec.style) %></td>
           <td>

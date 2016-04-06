@@ -21,7 +21,7 @@
         </td>
         <td id="status-<%= item.id %>">
           <%= link_to ( item.on_shelf? ? off_shelf_admin_item_path(item) : on_shelf_admin_item_path(item) ), method: :patch, remote: true do %>
-            <%= current_status(item.status) %>
+            <%= item_status(item.status) %>
           <% end %>
         </td>
         <td>

@@ -60,7 +60,16 @@ module Admin::ItemsHelper
     amount == 0 ? "無庫存" : amount
   end
 
-  def current_status(status)
+  def item_status(status)
+    case status
+    when "on_shelf"
+      return "上架中"
+    when "off_shelf"
+      return "已下架" 
+    end
+  end
+
+  def spec_status(status)
     case status
     when "on_shelf"
       return "上架中"

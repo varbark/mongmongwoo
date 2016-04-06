@@ -1,6 +1,6 @@
 class Admin::ItemSpecsController < AdminController
   before_action :find_item
-  before_action :find_spec, only: [:edit, :update, :destroy]
+  before_action :find_spec, only: [:edit, :update, :destroy, :on_shelf, :off_shelf]
 
   def index
     @item_specs = @item.specs
@@ -74,6 +74,22 @@ class Admin::ItemSpecsController < AdminController
     @item_spec.destroy!
     flash[:warning] = "樣式圖片已刪除"
     redirect_to admin_item_item_specs_path(@item)
+  end
+
+  def on_shelf
+    @item_spec.update_column(:status, 0)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def off_shelf
+    @item_spec.update_column(:status, 1)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   private
