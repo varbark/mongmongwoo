@@ -1,4 +1,5 @@
 class Staff::PhotosController < StaffController
+  before_action :require_assistant
   before_action :find_item
   before_action :find_photo, only: [:edit, :update, :destroy]
 

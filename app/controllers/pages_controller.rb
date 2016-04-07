@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def front
-    redirect_to admin_root_path if current_manager
+    redirect_to staff_root_path if current_assistant
   end
 end

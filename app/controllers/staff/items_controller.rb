@@ -1,4 +1,5 @@
 class Staff::ItemsController < StaffController
+  before_action :require_assistant
   before_action :find_item, only: [:show, :edit, :update, :destroy, :on_shelf, :off_shelf]
 
   def index

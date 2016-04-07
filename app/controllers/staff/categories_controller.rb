@@ -1,4 +1,5 @@
 class Staff::CategoriesController < StaffController
+  before_action :require_assistant
   before_action :find_category, only: [:show]
 
   def index

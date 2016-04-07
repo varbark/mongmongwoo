@@ -1,4 +1,5 @@
 class Staff::ItemSpecsController < StaffController
+  before_action :require_assistant
   before_action :find_item
   before_action :find_spec, only: [:edit, :update, :destroy, :on_shelf, :off_shelf]
 
