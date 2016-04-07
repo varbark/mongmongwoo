@@ -7,6 +7,7 @@
 //= require jquery-ui/sortable
 //= require jquery-ui/mouse
 //= require jquery_ujs
+//= require jquery-fileupload/basic
 //= require bootstrap
 //= require custom
 //= require jquery.dataTables.min

@@ -1,8 +1,33 @@
 Rails.application.routes.draw do
+  root 'pages#front'
   mount Ckeditor::Engine => '/ckeditor'
-  # 後台
+
+  # Assistant session
+  get "/signin", to: "sessions#new"
+  post "/signin", to: "sessions#create"
+  delete "/signout", to: "sessions#destroy"
+
+  # Manager session
+  get "/mmw_signin", to: "sessions#manager_new"
+  post "/mmw_signin", to: "sessions#manager_create"
+  delete "/mmw_signout", to: "sessions#manager_destroy"
+
+  # 助理後台
+  namespace :staff do
+    root "categories#index"
+
+    resources :categories, only: [:show, :index]
+
+    resources :items do
+      resources :photos, except: [:show]
+
+      resources :item_specs, except: [:show]
+    end
+  end
+
+  # 管理員後台
   namespace :admin do
-    root "items#index"
+    root "categories#index"
 
     resources :items do
       member do

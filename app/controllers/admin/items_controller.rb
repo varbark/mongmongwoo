@@ -1,4 +1,5 @@
 class Admin::ItemsController < AdminController
+  before_action :require_manager
   before_action :find_item, only: [:show, :edit, :update, :destroy, :on_shelf, :off_shelf]
 
   def index

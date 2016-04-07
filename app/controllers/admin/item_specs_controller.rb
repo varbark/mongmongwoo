@@ -1,4 +1,5 @@
 class Admin::ItemSpecsController < AdminController
+  before_action :require_manager
   before_action :find_item
   before_action :find_spec, only: [:edit, :update, :destroy, :on_shelf, :off_shelf]
 
