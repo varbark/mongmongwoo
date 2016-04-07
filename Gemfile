@@ -21,6 +21,7 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 gem 'ckeditor'
 gem 'will_paginate', '~> 3.0.5'
+gem "jquery-fileupload-rails"
 
 # For carawl cvs data setup
 gem 'nokogiri'

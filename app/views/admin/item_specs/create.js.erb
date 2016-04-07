@@ -1,5 +1,9 @@
-<% if @item_spec.valid? %>
-  $("#new-item-spec").remove();
-  // $("#specs-table-list").append("#spec-<%= @item_spec.id %>");
-  $("<%= j (render @item_spec) %>").appendTo("#specs-table-list");
+<% if @item_spec.new_record? %>
+  alert("Failed to upload images: <%= j @item_spec.errors.full_messages.join(', ').html_save %>");
+<% else %>
+  $(function(){
+    new PNotify({
+      title: '已新增 <%= @item_spec.style %> 樣式'
+    });
+  });
 <% end %>
