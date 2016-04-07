@@ -1,5 +1,6 @@
 class Admin::UsersController < AdminController
   layout "admin"
+  before_action :require_manager
 
   # 針對import_usere關掉表單token驗證
   skip_before_action :verify_authenticity_token, only: [:import_user]

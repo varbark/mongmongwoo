@@ -1,8 +1,20 @@
 Rails.application.routes.draw do
+  root 'pages#front'
   mount Ckeditor::Engine => '/ckeditor'
+
+   # session
+   get "/signin", to: "sessions#new"
+   post "/signin", to: "sessions#create"
+   delete "/signout", to: "sessions#destroy"
+
   # 後台
   namespace :admin do
     root "items#index"
+
+    # admin session
+    # get "/signin", to: "manager_sessions#new"
+    # post "/signin", to: "manager_sessions#create"
+    # delete "/signout", to: "manager_sessions#destroy"
 
     resources :items do
       member do

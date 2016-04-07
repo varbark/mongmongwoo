@@ -1,5 +1,6 @@
 class Admin::CategoriesController < AdminController
   layout "admin"
+  before_action :require_manager
   before_action :find_category, only: [:show]
 
   def index

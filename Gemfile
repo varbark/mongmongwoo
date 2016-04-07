@@ -22,6 +22,7 @@ gem 'mini_magick'
 gem 'ckeditor'
 gem 'will_paginate', '~> 3.0.5'
 gem "jquery-fileupload-rails"
+gem 'bcrypt', '~> 3.1.7'
 
 # For carawl cvs data setup
 gem 'nokogiri'
