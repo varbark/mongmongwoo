@@ -2,14 +2,58 @@ Rails.application.routes.draw do
   root 'pages#front'
   mount Ckeditor::Engine => '/ckeditor'
 
-   # session
-   get "/signin", to: "sessions#new"
-   post "/signin", to: "sessions#create"
-   delete "/signout", to: "sessions#destroy"
+  # session
+  get "/signin", to: "sessions#new"
+  post "/signin", to: "sessions#create"
+  delete "/signout", to: "sessions#destroy"
+
+  # 助理
+  namespace :staff do
+    root "categories#index"
+
+    # admin session
+    # get "/signin", to: "manager_sessions#new"
+    # post "/signin", to: "manager_sessions#create"
+    # delete "/signout", to: "manager_sessions#destroy"
+
+    resources :items do
+      # member do
+      #   patch "on_shelf"
+      #   patch "off_shelf"
+      # end
+
+      # TODO photos uploading
+      resources :photos, except: [:show]
+
+      resources :item_specs, except: [:show] do
+        # member do
+        #   patch "on_shelf"
+        #   patch "off_shelf"
+        # end
+        # collection do
+        #   post "item_specs", to: "item_specs#create"
+        # end
+      end
+
+      # 商品重新排序
+      # collection do
+      #   post "sort_items_priority"
+      # end
+    end
+
+    # post "sort_items_priority", to: "items#sort_items_priority"
+    
+    resources :categories, only: [:show, :index] do
+      # 商品重新排序
+      # collection do
+      #   post "sort_items_priority"
+      # end
+    end
+  end
 
   # 後台
   namespace :admin do
-    root "items#index"
+    root "categories#index"
 
     # admin session
     # get "/signin", to: "manager_sessions#new"
