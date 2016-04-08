@@ -23,7 +23,7 @@ class Order < ActiveRecord::Base
 
   acts_as_paranoid
 
-  enum status: { "新增訂單" => 0, "處理中" => 1, "已出貨" => 2, "完成取貨" => 3, "訂單取消" => 4 }
+  enum status: { "新訂單" => 0, "處理中" => 1, "已出貨" => 2, "完成取貨" => 3, "訂單取消" => 4 }
 
   belongs_to :user
   has_many :items, class_name: "OrderItem", dependent: :destroy
