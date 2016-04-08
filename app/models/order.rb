@@ -23,7 +23,7 @@ class Order < ActiveRecord::Base
 
   acts_as_paranoid
 
-  enum status: { order_placed: 0, item_shipping: 1, item_shipped: 2, order_cancelled: 3 }
+  enum status: { "新增訂單" => 0, "處理中" => 1, "已出貨" => 2, "完成取貨" => 3, "訂單取消" => 4 }
 
   belongs_to :user
   has_many :items, class_name: "OrderItem", dependent: :destroy
@@ -54,10 +54,11 @@ class Order < ActiveRecord::Base
     result_order[:uid] = order.uid
     result_order[:user_id] = order.user_id
     result_order[:status] = order.status
+    result_order[:created_on] = order.created_on
     result_order[:items_price] = order.items_price
     result_order[:ship_fee] = order.ship_fee
     result_order[:total] = order.total
-  
+
     # 收件明細
     include_info = {}
     include_info[:id] = info.id

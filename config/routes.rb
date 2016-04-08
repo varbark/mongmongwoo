@@ -82,6 +82,7 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:index, :show] do
       member do
+        patch "order_processing"
         patch "item_shipping"
         patch "item_shipped"
         patch "order_cancelled"
