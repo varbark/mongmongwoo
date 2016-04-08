@@ -125,5 +125,15 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    namespace :v2 do
+      # 訂單API
+      resources :orders, only: [:show, :index] do
+        # 給 uid 回傳 orders[order1 , order2, ...]
+        collection do
+          get "/user_owned_orders/:uid" => "orders#user_owned_orders"
+        end
+      end
+    end
   end
 end
