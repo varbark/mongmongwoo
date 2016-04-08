@@ -1,6 +1,6 @@
 class Admin::OrdersController < AdminController
   before_action :require_manager
-  before_action :find_order, only: [:show, :item_shipping, :item_shipped, :order_cancelled]
+  before_action :find_order, only: [:show, :order_processing, :item_shipping, :item_shipped, :order_cancelled]
 
   def index
     @order_page = @orders = Order.includes(:user, :info, :items).recent.paginate(:page => params[:page])
@@ -21,9 +21,26 @@ class Admin::OrdersController < AdminController
     end
   end
 
-  def item_shipping
+  def order_processing
     begin
       @order.update_attributes!(status: 1)      
+    rescue ActiveRecord::ActiveRecordError
+      flash[:alert] = "請仔細確認訂單的實際處理進度"
+    end
+
+    respond_to do |format|
+      format.html do
+        flash[:notice] = "已將編號：#{@order.id} 訂單狀態設為處理中"
+        redirect_to :back
+      end
+
+      format.js
+    end
+  end
+
+  def item_shipping
+    begin
+      @order.update_attributes!(status: 2)      
     rescue ActiveRecord::ActiveRecordError
       flash[:alert] = "請仔細確認訂單的實際處理進度"
     end
@@ -40,7 +57,7 @@ class Admin::OrdersController < AdminController
 
   def item_shipped
     begin
-      @order.update_attributes!(status: 2)      
+      @order.update_attributes!(status: 3)      
     rescue ActiveRecord::ActiveRecordError
       flash[:alert] = "請仔細確認訂單的實際處理進度"
     end
@@ -57,7 +74,7 @@ class Admin::OrdersController < AdminController
 
   def order_cancelled
     begin
-      @order.update_attributes!(status: 3)      
+      @order.update_attributes!(status: 4)      
     rescue ActiveRecord::ActiveRecordError
       flash[:alert] = "請仔細確認訂單的實際處理進度"
     end

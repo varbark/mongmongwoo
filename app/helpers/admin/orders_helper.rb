@@ -15,4 +15,8 @@ module Admin::OrdersHelper
       return "訂單取消"
     end
   end
+
+  def phone_number_looking(order)
+    order.info.ship_phone
+  end
 end

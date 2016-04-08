@@ -82,6 +82,7 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:index, :show] do
       member do
+        patch "order_processing"
         patch "item_shipping"
         patch "item_shipped"
         patch "order_cancelled"
@@ -121,6 +122,16 @@ Rails.application.routes.draw do
           resources :roads, only: [:index, :show] do
             resources :stores, only: [:index, :show]
           end
+        end
+      end
+    end
+
+    namespace :v2 do
+      # 訂單API
+      resources :orders, only: [:show, :index] do
+        # 給 uid 回傳 orders[order1 , order2, ...]
+        collection do
+          get "/user_owned_orders/:uid" => "orders#user_owned_orders"
         end
       end
     end
