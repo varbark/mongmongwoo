@@ -67,6 +67,9 @@ ActiveRecord::Schema.define(version: 20160411021641) do
     t.datetime "updated_at"
   end
 
+  add_index "device_registrations", ["registration_id"], name: "index_device_registrations_on_registration_id", using: :btree
+  add_index "device_registrations", ["user_id"], name: "index_device_registrations_on_user_id", using: :btree
+
   create_table "item_categories", force: :cascade do |t|
     t.integer  "item_id",     limit: 4
     t.integer  "category_id", limit: 4
@@ -130,6 +133,8 @@ ActiveRecord::Schema.define(version: 20160411021641) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "notifications", ["item_id"], name: "index_notifications_on_item_id", using: :btree
 
   create_table "order_infos", force: :cascade do |t|
     t.integer  "order_id",        limit: 4

@@ -3,7 +3,7 @@ class Admin::NotificationsController < AdminController
   before_action :find_notification, only: [:show]
 
   def index
-    @notification_page = @notifications = Notification.recent.paginate(page: params[:page])
+    @notification_page = @notifications = Notification.includes(item: [:specs]).recent.paginate(page: params[:page])
   end
 
   def show
@@ -18,7 +18,7 @@ class Admin::NotificationsController < AdminController
 
     if @notification.save!
       # Sending Notification
-      @item = Item.includes(:specs).find(@notification.item_id)
+      # item = Item.includes(:specs).find(@notification.item_id)
       gcm = GCM.new("AIzaSyAUjlCMS-ENLXfqGkSaOLDIZtz5BihP0kM")
       registration_ids = DeviceRegistration.select(:registration_id).map(&:registration_id)
       options = {
@@ -27,8 +27,10 @@ class Admin::NotificationsController < AdminController
           content_text: @notification.content_text,
           # content_pic: @notification.content_pic.url,
           # content_pic: @item.specs.first.style_pic.url,
-          content_pic: @item.send_content_pic,
-          item_id: @notification.item_id
+          content_pic: @notification.send_content_pic,
+          item_id: @notification.item_id,
+          item_name: @notification.item.name,
+          item_price: @notification.item.price
           },
         collapse_key: "updated_score"
       }

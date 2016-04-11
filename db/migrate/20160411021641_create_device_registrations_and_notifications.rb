@@ -6,6 +6,9 @@ class CreateDeviceRegistrationsAndNotifications < ActiveRecord::Migration
       t.timestamps
     end
 
+    add_index :device_registrations, :user_id
+    add_index :device_registrations, :registration_id
+
     create_table :notifications do |t|
       t.integer :item_id
       t.string :content_title
@@ -13,5 +16,7 @@ class CreateDeviceRegistrationsAndNotifications < ActiveRecord::Migration
       t.string :content_pic
       t.timestamps
     end
+
+    add_index :notifications, :item_id
   end
 end
