@@ -20,7 +20,7 @@ class Admin::NotificationsController < AdminController
       # Sending Notification
       @item = Item.includes(:specs).find(@notification.item_id)
       gcm = GCM.new("AIzaSyAUjlCMS-ENLXfqGkSaOLDIZtz5BihP0kM")
-      registration_ids = DeviceRegistration.all
+      registration_ids = DeviceRegistration.select(:registration_id).map(&:registration_id)
       options = {
         data: {
           content_title: @notification.content_title,
