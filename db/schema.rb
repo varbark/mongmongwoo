@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20160411021641) do
   end
 
   create_table "device_registrations", force: :cascade do |t|
-    t.integer  "registration_id", limit: 4
     t.integer  "user_id",         limit: 4
+    t.string   "registration_id", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20160411021641) do
   create_table "notifications", force: :cascade do |t|
     t.integer  "item_id",       limit: 4
     t.string   "content_title", limit: 255
-    t.text     "content_text",  limit: 65535
+    t.string   "content_text",  limit: 255
     t.string   "content_pic",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
