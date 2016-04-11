@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407071623) do
+ActiveRecord::Schema.define(version: 20160411021641) do
 
   create_table "assistants", force: :cascade do |t|
     t.string   "username",        limit: 255
@@ -58,6 +58,13 @@ ActiveRecord::Schema.define(version: 20160407071623) do
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "device_registrations", force: :cascade do |t|
+    t.integer  "registration_id", limit: 4
+    t.integer  "user_id",         limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "item_categories", force: :cascade do |t|
@@ -114,6 +121,15 @@ ActiveRecord::Schema.define(version: 20160407071623) do
   end
 
   add_index "managers", ["deleted_at"], name: "index_managers_on_deleted_at", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "item_id",       limit: 4
+    t.string   "content_title", limit: 255
+    t.text     "content_text",  limit: 65535
+    t.string   "content_pic",   limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "order_infos", force: :cascade do |t|
     t.integer  "order_id",        limit: 4
