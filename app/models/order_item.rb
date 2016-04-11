@@ -14,4 +14,8 @@
 
 class OrderItem < ActiveRecord::Base
   belongs_to :order
+
+  def info_find_item_link
+    Item.find_by(name: self.item_name)
+  end
 end
