@@ -12,4 +12,7 @@
 #
 
 class Notification < ActiveRecord::Base
+  scope :recent, lambda { order(id: :DESC) }
+
+  mount_uploader :content_pic, NotificationUploader
 end
