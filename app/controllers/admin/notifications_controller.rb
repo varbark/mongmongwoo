@@ -18,14 +18,17 @@ class Admin::NotificationsController < AdminController
 
     if @notification.save!
       # Sending Notification
+      @item = Item.includes(:specs).find(@notification.item_id)
       gcm = GCM.new("AIzaSyAUjlCMS-ENLXfqGkSaOLDIZtz5BihP0kM")
       registration_ids = DeviceRegistration.all
       options = {
         data: {
           content_title: @notification.content_title,
           content_text: @notification.content_text,
-          content_pic: @notification.content_pic.url,
-          item_id: @notification.id
+          # content_pic: @notification.content_pic.url,
+          # content_pic: @item.specs.first.style_pic.url,
+          content_pic: @item.send_content_pic,
+          item_id: @notification.item_id
           },
         collapse_key: "updated_score"
       }
@@ -48,4 +51,8 @@ class Admin::NotificationsController < AdminController
   def find_notification
     @notification = Notification.find(params[:id])
   end
+
+  # def find_item
+  #   @item = Item.find(id: @notification.item_id)
+  # end
 end
