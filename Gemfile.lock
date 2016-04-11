@@ -142,12 +142,18 @@ GEM
       sexp_processor (~> 4.4)
     font-awesome-rails (4.5.0.0)
       railties (>= 3.2, < 5.0)
+    gcm (0.1.1)
+      httparty
+      json
     git-version-bump (0.15.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.7)
       tilt
     highline (1.7.8)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     ice_nine (0.11.2)
     jquery-fileupload-rails (0.4.6)
@@ -177,6 +183,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     mysql2 (0.4.3)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -333,6 +340,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   faker
   font-awesome-rails
+  gcm
   jquery-fileupload-rails
   jquery-rails
   jquery-ui-rails
