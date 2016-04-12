@@ -3,49 +3,27 @@
     <ol class="breadcrumb">
       <li><a href="<%= admin_root_path %>">萌萌屋</a></li>
       <li><a href="<%= admin_notifications_path %>">推播訊息列表</a></li>
-      <li class="<%= "active" if current_page?(admin_notifications_path(@notification)) %>"><%= @notification.content_title %>
+      <li class="<%= "active" if current_page?(admin_notifications_path(@notification)) %>">
+        <%= @notification.content_title %>
       </li>
     </ol>
     <div class="pull-right">
-      <%= link_to "編輯商品", edit_admin_item_path(@item), class: "btn btn-default btn-sm" %>
-      <%= link_to "商品圖片", admin_item_photos_path(@item), class: "btn btn-primary btn-sm" %>
-      <%= link_to "商品樣式", admin_item_item_specs_path(@item), class: "btn btn-success btn-sm" %>
+      <%= link_to "回上頁", admin_notifications_path, { class: "btn btn-default" } %>
     </div>
-    <div class="item-cover-words-intro">
-      <div class="cover-intro col-md-4">
-        <!-- <%= image_tag(@item.intro_cover) %> -->
-        <%= item_cover(@item.cover) %>
+    <div class="notification-intro">
+      <div class="noti-cover col-md-2">
+        <%= image_tag(@notification.send_content_pic) %>
       </div>
-      <div class="words-intro col-md-5">
+      <div class="noti-message col-md-8">
         <dl class="dl-horizontal">
-          <dt>淘寶連結</dt>
-          <dd>
-            <%= link_to @item.url, target: "_blank" do %>
-              按此前往淘寶商品頁
-            <% end %>
-          </dd>
-          <dt>商品名稱</dt>
-          <dd><%= @item.name %></dd>          
-          <dt>商品價格</dt>
-          <dd>NT<%= number_to_currency(@item.price) %></dd>
-          <dt>商品敘述</dt>
-          <dd><%= raw @item.description %></dd>
+          <dt>推播商品</dt>
+          <dd><%= link_to @item.name, admin_item_path(@item) %></dd>
+          <dt>訊息標題</dt>
+          <dd><%= @notification.content_title %></dd>
+          <dt>訊息內容</dt>
+          <dd><%= @notification.content_text %></dd>
         </dl>
       </div>
-    </div>
-    <br>
-    <!-- 商品圖片 -->
-    <div class="well">
-      <p class="lead">商品圖片</p>
-      <%= render partial: "photo_display", locals: { item: @item, photos: @photos } %>
-    </div>
-    <br>
-    <!-- 樣式圖片 -->
-    <div class="well">
-      <p class="lead">樣式圖片</p>
-      <dl class="dl-horizontal">
-        <%= render partial: "spec_display", locals: { specs: @specs } %>
-      </dl>
     </div>
   </div>
 </div>

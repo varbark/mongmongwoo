@@ -11,10 +11,10 @@
     <% @notifications.each do |notification| %>
       <tr>
         <td>
-          <%= link_to notification.id, "#" %>
+          <%= link_to notification.id, admin_notification_path(notification) %>
         </td>
         <td>
-          <%= link_to notification.content_title, "#" %>
+          <%= link_to notification.content_title, admin_notification_path(notification) %>
         </td>
        
         <td>
@@ -27,9 +27,7 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu list-group" aria-labelledby="dropdownMenu4">
-              <li><%= link_to "編輯" %></li>
-              <li><%= link_to "圖片" %></li>
-              <li><%= link_to "樣式" %></li>
+              <li><%= link_to "編輯" %></li>              
               <li><%= link_to "刪除" %></li>
             </ul>
           </div>

@@ -12,11 +12,11 @@
   </div>
 </div>
 
-<!-- TODO 改選單或勾選方式 -->
+<!-- TODO 邏輯移至helper -->
 <div class="form-group">
   <%= f.label :item_id, "推播商品", class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
-    <%= f.select :item_id, Item.all.collect {|item| [item.name, item.id]}, { include_blank: "請選擇商品" }, { class: "form-control", required: true } %>
+    <%= f.select :item_id, Item.all.collect { |item| [item.name, item.id] }, { include_blank: "請選擇商品" }, { class: "form-control", required: true } %>
   </div>
 </div>
 
