@@ -88,6 +88,12 @@ Rails.application.routes.draw do
         patch "order_cancelled"
       end
     end
+
+    # 註冊裝置
+    resources :device_registrations, only: [:index, :show]
+
+    # 推播訊息
+    resources :notifications, only: [:index, :show, :new, :create]
   end
 
   # API for App
@@ -124,6 +130,9 @@ Rails.application.routes.draw do
           end
         end
       end
+
+      # 註冊裝置
+      resources :device_registrations, only: [:create]
     end
 
     namespace :v2 do

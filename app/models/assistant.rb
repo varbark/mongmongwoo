@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: assistants
+#
+#  id              :integer          not null, primary key
+#  username        :string(255)
+#  email           :string(255)
+#  password_digest :string(255)
+#  status          :integer          default(0)
+#  position        :integer          default(0)
+#  deleted_at      :datetime
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 class Assistant < ActiveRecord::Base
   scope :recent, lambda { order(id: :DESC) }
 
