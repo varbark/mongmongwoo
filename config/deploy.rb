@@ -14,7 +14,7 @@ set :default_stage, "staging"
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/storage}
 
-role :web, %w{deploy@106.185.34.142}
+# role :web, %w{deploy@106.185.34.142}
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
