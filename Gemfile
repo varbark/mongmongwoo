@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 if ENV["RAILS_ENV"] == "development"
   ruby '2.2.2'
-elsif ENV["RAILS_ENV"] == "production"
+elsif ENV["RAILS_ENV"] == "production" || ENV["RAILS_ENV"] == "staging"
   ruby '2.2.4'
 end
 
