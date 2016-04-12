@@ -1,3 +1,4 @@
+require 'capistrano/ext/multistage'
 # Load DSL and Setup Up Stages
 require 'capistrano/setup'
 
