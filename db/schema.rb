@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407071623) do
+ActiveRecord::Schema.define(version: 20160411021641) do
 
   create_table "assistants", force: :cascade do |t|
     t.string   "username",        limit: 255
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(version: 20160407071623) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "device_registrations", force: :cascade do |t|
+    t.integer  "user_id",         limit: 4
+    t.string   "registration_id", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "device_registrations", ["registration_id"], name: "index_device_registrations_on_registration_id", using: :btree
+  add_index "device_registrations", ["user_id"], name: "index_device_registrations_on_user_id", using: :btree
 
   create_table "item_categories", force: :cascade do |t|
     t.integer  "item_id",     limit: 4
@@ -114,6 +124,17 @@ ActiveRecord::Schema.define(version: 20160407071623) do
   end
 
   add_index "managers", ["deleted_at"], name: "index_managers_on_deleted_at", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "item_id",       limit: 4
+    t.string   "content_title", limit: 255
+    t.string   "content_text",  limit: 255
+    t.string   "content_pic",   limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["item_id"], name: "index_notifications_on_item_id", using: :btree
 
   create_table "order_infos", force: :cascade do |t|
     t.integer  "order_id",        limit: 4
